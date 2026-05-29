@@ -1,0 +1,50 @@
+# ── Web Framework ─────────────────────────────────────────────────────────── #
+fastapi>=0.111.0,<0.116.0
+uvicorn[standard]>=0.29.0,<0.32.0
+python-multipart>=0.0.9
+
+# ── Settings / Config ─────────────────────────────────────────────────────── #
+# pydantic v2 required; pydantic-settings must match major version
+pydantic>=2.7.0,<3.0.0
+pydantic-settings>=2.3.0,<3.0.0
+python-dotenv>=1.0.0
+
+# ── LLM Providers ─────────────────────────────────────────────────────────── #
+# google-generativeai 0.8.x pulls protobuf>=4.25 — let pip choose a compatible build
+google-generativeai>=0.7.0,<1.0.0
+groq>=0.9.0,<1.0.0
+
+# ── Embeddings / Vector Store ─────────────────────────────────────────────── #
+# chromadb 0.5.x requires hnswlib and opentelemetry; pin to a stable minor
+chromadb>=0.5.0,<0.6.0
+
+# ── Retrieval ─────────────────────────────────────────────────────────────── #
+rank-bm25>=0.2.2
+# cohere v5 requires httpx>=0.21 — compatible with fastapi/starlette
+cohere>=5.5.0,<6.0.0
+
+# ── Document Loaders ─────────────────────────────────────────────────────────#
+PyMuPDF>=1.24.0,<2.0.0       # PDF loading (fitz)
+python-docx>=1.1.0            # DOCX loading
+Pillow>=10.0.0,<11.0.0        # Image loading
+pytesseract>=0.3.10           # OCR for images
+
+# ── Task Queue ────────────────────────────────────────────────────────────── #
+celery>=5.3.0,<6.0.0
+redis>=5.0.0,<6.0.0
+# flower 2.x requires celery>=5.0; do NOT pin exact — it conflicts on kombu sub-dep
+flower>=2.0.0,<3.0.0
+
+# ── Evaluation ────────────────────────────────────────────────────────────── #
+# ragas 0.2.x dropped the hard langchain/openai pins that caused conflicts
+ragas>=0.2.0,<0.3.0
+datasets>=2.19.0,<3.0.0
+
+# ── Testing ───────────────────────────────────────────────────────────────── #
+pytest>=8.2.0
+pytest-asyncio>=0.23.0
+httpx>=0.27.0,<1.0.0
+
+# ── Utilities ─────────────────────────────────────────────────────────────── #
+tqdm>=4.66.0
+tenacity>=8.3.0,<10.0.0

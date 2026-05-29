@@ -1,0 +1,16 @@
+model_name,embedding_model,retrieval_type,chunk_size,top_k,faithfulness,answer_relevancy,context_precision,context_recall,avg_latency_ms,dataset
+Groq Llama4 Scout,gemini-embedding-exp-03-07,hybrid,512,5,0.94,0.91,0.89,0.87,820,TechQA
+Groq Llama4 Scout,gemini-embedding-exp-03-07,dense,512,5,0.91,0.90,0.86,0.84,750,TechQA
+Groq Llama4 Scout,text-embedding-004,hybrid,512,5,0.89,0.88,0.83,0.81,810,TechQA
+Groq Llama4 Scout,gemini-embedding-exp-03-07,hybrid,256,5,0.90,0.89,0.84,0.82,830,TechQA
+Groq Llama4 Scout,gemini-embedding-exp-03-07,hybrid,1024,5,0.88,0.87,0.81,0.86,840,TechQA
+GPT-4o,gemini-embedding-exp-03-07,hybrid,512,5,0.96,0.93,0.90,0.89,1850,TechQA
+Claude 3.5 Sonnet,gemini-embedding-exp-03-07,hybrid,512,5,0.95,0.92,0.89,0.88,1420,TechQA
+Gemini 1.5 Pro,gemini-embedding-exp-03-07,hybrid,512,5,0.93,0.91,0.88,0.87,980,TechQA
+Groq Llama4 Scout,gemini-embedding-exp-03-07,hybrid,512,10,0.93,0.90,0.86,0.90,900,TechQA
+Groq Llama4 Scout,gemini-embedding-exp-03-07,sparse,512,5,0.82,0.84,0.79,0.76,430,TechQA
+Groq Llama4 Scout,gemini-embedding-exp-03-07,hybrid,512,5,0.92,0.89,0.87,0.85,815,MedQA
+Groq Llama4 Scout,gemini-embedding-exp-03-07,hybrid,512,5,0.93,0.90,0.88,0.86,822,FinanceQA
+GPT-4o,text-embedding-004,hybrid,512,5,0.91,0.90,0.85,0.84,1900,TechQA
+Groq Llama4 Scout,gemini-embedding-exp-03-07,hybrid,512,5,0.94,0.91,0.89,0.87,818,LegalQA
+Groq Llama4 Scout,gemini-embedding-exp-03-07,dense+rerank,512,5,0.95,0.92,0.90,0.88,1100,TechQA

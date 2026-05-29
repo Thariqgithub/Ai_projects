@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAG Chat</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0c0e12;--surface:#13161c;--surface2:#1a1e27;--surface3:#20242f;
+  --border:#252b38;--border2:#2e3647;
+  --accent:#4f8ef7;--accent2:#7eb3ff;
+  --green:#3ecf8e;--amber:#f5a623;--red:#f56342;--purple:#a78bfa;
+  --text:#e8eaf0;--text2:#8890a4;--text3:#545e72;
+  --font:'Syne',sans-serif;--mono:'JetBrains Mono',monospace;
+  --r:10px;--rl:16px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--font);font-size:15px;line-height:1.6;overflow:hidden}
+
+/* ── Layout ── */
+.app{display:grid;grid-template-columns:280px 1fr;height:100vh}
+
+/* ── Sidebar ── */
+.sidebar{background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden}
+.sb-head{padding:20px 20px 18px;border-bottom:1px solid var(--border)}
+.logo-row{display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.logo-icon{width:30px;height:30px;background:linear-gradient(135deg,var(--accent),var(--green));border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px}
+.logo-name{font-size:14px;font-weight:700}
+.logo-sub{font-family:var(--mono);font-size:10px;color:var(--text3);letter-spacing:.05em}
+
+.sb-scroll{flex:1;overflow-y:auto;padding:16px 0}
+.sb-scroll::-webkit-scrollbar{width:3px}
+.sb-scroll::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+
+.sb-section{padding:0 16px;margin-bottom:20px}
+.sb-label{font-family:var(--mono);font-size:10px;color:var(--text3);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
+
+/* Stats */
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.stat{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r);padding:8px 10px}
+.stat-val{font-family:var(--mono);font-size:16px;font-weight:500;color:var(--accent);line-height:1.2}
+.stat-lbl{font-size:10px;color:var(--text3);margin-top:1px}
+
+/* Model badge */
+.mbadge{display:flex;align-items:center;gap:8px;padding:9px 11px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--r)}
+.mdot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 5px var(--green);flex-shrink:0}
+.mname{font-family:var(--mono);font-size:11px;color:var(--accent2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* Config */
+.cfg{display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2)}
+.cfg:last-child{border-bottom:none}
+select.csel{background:var(--surface2);border:1px solid var(--border2);border-radius:5px;color:var(--accent2);font-family:var(--mono);font-size:11px;padding:2px 5px;cursor:pointer;outline:none}
+input[type=range]{width:60px;accent-color:var(--accent)}
+.cval{font-family:var(--mono);font-size:11px;color:var(--accent2)}
+
+/* Upload zone */
+.upload-zone{border:1.5px dashed var(--border2);border-radius:var(--r);padding:16px;text-align:center;cursor:pointer;transition:all .2s;position:relative;background:var(--surface2)}
+.upload-zone:hover,.upload-zone.drag{border-color:var(--accent);background:rgba(79,142,247,.06)}
+.upload-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.upload-icon{font-size:22px;margin-bottom:6px}
+.upload-main{font-size:12px;color:var(--text2);margin-bottom:2px}
+.upload-sub{font-family:var(--mono);font-size:10px;color:var(--text3)}
+
+/* File queue */
+.file-queue{margin-top:10px;display:flex;flex-direction:column;gap:6px}
+.fitem{display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--surface3);border:1px solid var(--border);border-radius:8px}
+.ficon{font-size:16px;flex-shrink:0}
+.finfo{flex:1;min-width:0}
+.fname{font-size:12px;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fsize{font-family:var(--mono);font-size:10px;color:var(--text3)}
+.fstatus{font-family:var(--mono);font-size:10px;flex-shrink:0}
+.fstatus.pending{color:var(--text3)}
+.fstatus.uploading{color:var(--amber)}
+.fstatus.done{color:var(--green)}
+.fstatus.error{color:var(--red)}
+.fremove{background:none;border:none;color:var(--text3);cursor:pointer;font-size:14px;padding:0 2px;transition:color .15s;flex-shrink:0}
+.fremove:hover{color:var(--red)}
+
+.ingest-btn{width:100%;margin-top:10px;padding:9px;background:rgba(62,207,142,.1);border:1px solid rgba(62,207,142,.3);border-radius:var(--r);color:var(--green);font-family:var(--font);font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center;gap:6px}
+.ingest-btn:hover{background:rgba(62,207,142,.18)}
+.ingest-btn:disabled{opacity:.4;cursor:not-allowed}
+
+/* Sources list */
+.src-list{display:flex;flex-direction:column;gap:4px;max-height:160px;overflow-y:auto}
+.src-list::-webkit-scrollbar{width:3px}
+.src-list::-webkit-scrollbar-thumb{background:var(--border2)}
+.src-item{display:flex;align-items:center;gap:6px;padding:5px 8px;background:var(--surface2);border-radius:6px;font-size:11px;color:var(--text2);font-family:var(--mono)}
+.src-dot{width:5px;height:5px;border-radius:50%;background:var(--green);flex-shrink:0}
+
+.sb-footer{padding:14px 16px;border-top:1px solid var(--border);flex-shrink:0}
+.api-row{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--text3);font-family:var(--mono)}
+.sdot{width:6px;height:6px;border-radius:50%;background:var(--text3);transition:background .3s}
+.sdot.on{background:var(--green);box-shadow:0 0 5px var(--green)}
+.sdot.off{background:var(--red)}
+
+/* ── Main ── */
+.main{display:flex;flex-direction:column;height:100vh;overflow:hidden}
+.topbar{padding:14px 28px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.topbar-title{font-size:13px;font-weight:600;color:var(--text2)}
+.topbar-meta{font-family:var(--mono);font-size:10px;color:var(--text3)}
+.new-btn{padding:6px 14px;background:transparent;border:1px solid var(--border2);border-radius:7px;color:var(--text2);font-family:var(--font);font-size:12px;cursor:pointer;transition:all .15s}
+.new-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+/* Messages */
+.messages{flex:1;overflow-y:auto;padding:28px;display:flex;flex-direction:column;gap:18px;scroll-behavior:smooth}
+.messages::-webkit-scrollbar{width:4px}
+.messages::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+
+/* Empty */
+.empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px;gap:16px;animation:fadeIn .4s}
+.empty-icon{width:54px;height:54px;background:linear-gradient(135deg,rgba(79,142,247,.15),rgba(62,207,142,.1));border:1px solid var(--border2);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px}
+.empty-title{font-size:18px;font-weight:700}
+.empty-desc{font-size:13px;color:var(--text2);max-width:320px;line-height:1.7}
+.sugs{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;max-width:500px}
+.sug{padding:7px 13px;background:var(--surface2);border:1px solid var(--border);border-radius:20px;font-size:12px;color:var(--text2);cursor:pointer;transition:all .15s}
+.sug:hover{border-color:var(--accent);color:var(--accent);background:rgba(79,142,247,.06)}
+
+/* Bubbles */
+.msg{display:flex;gap:10px;animation:slideUp .25s ease;max-width:800px}
+.msg.user{flex-direction:row-reverse;align-self:flex-end}
+.msg.ai{align-self:flex-start}
+.av{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;margin-top:2px}
+.av.u{background:linear-gradient(135deg,var(--accent),#6366f1)}
+.av.a{background:linear-gradient(135deg,var(--green),#0fa968);font-size:15px}
+.bubble{max-width:620px;padding:12px 16px;border-radius:var(--rl);font-size:14px;line-height:1.7}
+.msg.user .bubble{background:linear-gradient(135deg,rgba(79,142,247,.18),rgba(99,102,241,.12));border:1px solid rgba(79,142,247,.25);border-top-right-radius:4px}
+.msg.ai .bubble{background:var(--surface);border:1px solid var(--border);border-top-left-radius:4px}
+.bubble strong{color:var(--accent2);font-weight:600}
+.bubble code{font-family:var(--mono);font-size:12px;background:var(--surface2);border:1px solid var(--border);padding:1px 5px;border-radius:4px;color:var(--green)}
+.bubble ul,.bubble ol{padding-left:16px;margin:4px 0}
+.bubble li{margin:2px 0}
+
+/* Sources chips */
+.srcs{margin-top:10px;padding-top:10px;border-top:1px solid var(--border);display:flex;flex-wrap:wrap;gap:5px}
+.srcs-lbl{width:100%;font-family:var(--mono);font-size:10px;color:var(--text3);letter-spacing:.06em;text-transform:uppercase;margin-bottom:3px}
+.chip{display:flex;align-items:center;gap:4px;padding:3px 9px;background:var(--surface2);border:1px solid var(--border);border-radius:20px;font-size:11px;color:var(--text2);font-family:var(--mono)}
+.chip .sc{color:var(--green);font-size:10px}
+
+/* Typing */
+.typing{display:flex;gap:5px;padding:4px;align-items:center}
+.typing span{width:6px;height:6px;border-radius:50%;background:var(--text3);animation:bounce .9s infinite}
+.typing span:nth-child(2){animation-delay:.15s}
+.typing span:nth-child(3){animation-delay:.3s}
+.errmsg{padding:10px 14px;background:rgba(245,99,66,.08);border:1px solid rgba(245,99,66,.25);border-radius:var(--r);font-size:13px;color:var(--red)}
+
+/* Input */
+.input-area{padding:14px 28px 20px;border-top:1px solid var(--border);flex-shrink:0}
+.input-wrap{display:flex;gap:8px;align-items:flex-end;background:var(--surface);border:1px solid var(--border2);border-radius:var(--rl);padding:8px 8px 8px 14px;transition:border-color .15s}
+.input-wrap:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px rgba(79,142,247,.08)}
+textarea#query{flex:1;background:transparent;border:none;outline:none;color:var(--text);font-family:var(--font);font-size:14px;resize:none;min-height:24px;max-height:120px;line-height:1.6}
+textarea#query::placeholder{color:var(--text3)}
+.sbtn{width:34px;height:34px;border-radius:8px;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s}
+.sbtn.send{background:var(--accent);color:#fff}
+.sbtn.send:hover{background:var(--accent2);transform:scale(1.04)}
+.sbtn.send:disabled{background:var(--border2);cursor:not-allowed;transform:none}
+.hint{margin-top:7px;font-size:11px;color:var(--text3);text-align:center;font-family:var(--mono)}
+
+/* Animations */
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes bounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
+.cursor{display:inline-block;width:2px;height:13px;background:var(--accent);margin-left:2px;vertical-align:middle;animation:blink .7s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* Ingest toast */
+.toast{position:fixed;bottom:24px;right:24px;padding:12px 18px;background:var(--surface);border:1px solid var(--green);border-radius:var(--r);font-size:13px;color:var(--green);font-family:var(--mono);animation:slideUp .3s ease;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,.4)}
+</style>
+</head>
+<body>
+<div class="app">
+
+<!-- ── Sidebar ── -->
+<aside class="sidebar">
+  <div class="sb-head">
+    <div class="logo-row">
+      <div class="logo-icon">⚡</div>
+      <span class="logo-name">RAG Pipeline</span>
+    </div>
+    <div class="logo-sub">GROQ VISION · HYBRID RETRIEVAL</div>
+  </div>
+
+  <div class="sb-scroll">
+
+    <!-- Model -->
+    <div class="sb-section">
+      <div class="sb-label">LLM</div>
+      <div class="mbadge">
+        <div class="mdot"></div>
+        <span class="mname">llama-4-scout · Groq</span>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="sb-section">
+      <div class="sb-label">Index</div>
+      <div class="stats-grid">
+        <div class="stat"><div class="stat-val" id="s-chunks">—</div><div class="stat-lbl">chunks</div></div>
+        <div class="stat"><div class="stat-val" id="s-srcs">—</div><div class="stat-lbl">sources</div></div>
+      </div>
+    </div>
+
+    <!-- Upload documents -->
+    <div class="sb-section">
+      <div class="sb-label">Upload Documents</div>
+      <div class="upload-zone" id="drop-zone"
+           ondragover="onDragOver(event)" ondragleave="onDragLeave(event)" ondrop="onDrop(event)">
+        <input type="file" id="file-input" multiple
+               accept=".pdf,.txt,.docx,.md,.csv,.png,.jpg,.jpeg"
+               onchange="onFilePicked(event)">
+        <div class="upload-icon">📂</div>
+        <div class="upload-main">Drop files or click to browse</div>
+        <div class="upload-sub">PDF · DOCX · TXT · MD · CSV · PNG · JPG</div>
+      </div>
+
+      <div class="file-queue" id="file-queue"></div>
+
+      <button class="ingest-btn" id="ingest-btn" onclick="ingestAll()" disabled>
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+          <path d="M6.5 1v8M3 6l3.5 3.5L10 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Ingest into RAG index
+      </button>
+    </div>
+
+    <!-- Settings -->
+    <div class="sb-section">
+      <div class="sb-label">Settings</div>
+      <div class="cfg"><span>Model</span>
+        <select class="csel" id="cfg-model">
+          <option value="">auto</option>
+          <option value="groq">groq</option>
+          <option value="gemini">gemini</option>
+        </select>
+      </div>
+      <div class="cfg"><span>Top-K</span>
+        <div style="display:flex;align-items:center;gap:5px">
+          <input type="range" id="cfg-topk" min="1" max="15" value="5"
+            oninput="document.getElementById('topk-v').textContent=this.value">
+          <span class="cval" id="topk-v">5</span>
+        </div>
+      </div>
+      <div class="cfg"><span>Stream</span>
+        <select class="csel" id="cfg-stream">
+          <option value="false">off</option>
+          <option value="true">on</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Ingested sources -->
+    <div class="sb-section">
+      <div class="sb-label">Sources in Index</div>
+      <div class="src-list" id="src-list">
+        <div style="font-size:11px;color:var(--text3);font-family:var(--mono)">no sources yet</div>
+      </div>
+    </div>
+
+  </div><!-- /sb-scroll -->
+
+  <div class="sb-footer">
+    <div class="api-row">
+      <div class="sdot" id="sdot"></div>
+      <span id="stext">checking api...</span>
+    </div>
+  </div>
+</aside>
+
+<!-- ── Main ── -->
+<main class="main">
+  <div class="topbar">
+    <span class="topbar-title">Chat with your documents</span>
+    <div style="display:flex;align-items:center;gap:10px">
+      <span class="topbar-meta" id="tmeta">gemini-embedding-2-preview · 3072-dim</span>
+      <button class="new-btn" onclick="newChat()">New chat</button>
+    </div>
+  </div>
+
+  <div class="messages" id="messages">
+    <div class="empty" id="empty">
+      <div class="empty-icon">🔍</div>
+      <div class="empty-title">Ready to answer</div>
+      <div class="empty-desc">Upload documents in the sidebar, click Ingest, then ask anything about them.</div>
+      <div class="sugs">
+        <div class="sug" onclick="ask('What is RAG and how does hybrid retrieval work?')">What is RAG?</div>
+        <div class="sug" onclick="ask('What are the RAGAS scores for Groq with hybrid retrieval?')">RAGAS scores</div>
+        <div class="sug" onclick="ask('What is the context window of Llama 4 Scout?')">Llama 4 Scout specs</div>
+        <div class="sug" onclick="ask('Which vector database should I use for production?')">Best vector DB</div>
+        <div class="sug" onclick="ask('Summarize all the documents in the index')">Summarize documents</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="input-area">
+    <div class="input-wrap">
+      <textarea id="query" rows="1" placeholder="Ask a question about your documents..."
+        onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+      <button class="sbtn send" id="send-btn" onclick="sendQuery()">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+          <path d="M7.5 12V3M3 7.5l4.5-4.5 4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+    <div class="hint">Enter to send · Shift+Enter for newline · Upload docs in the sidebar →</div>
+  </div>
+</main>
+
+</div><!-- /app -->
+
+<script>
+const API = 'http://localhost:8000/api/v1';
+let isLoading = false;
+let fileQueue = []; // [{file, status: 'pending'|'uploading'|'done'|'error', chunks}]
+
+// ── Boot ──────────────────────────────────────────────────────────────────
+async function init() {
+  await checkStatus();
+  await loadStats();
+}
+
+async function checkStatus() {
+  const dot = document.getElementById('sdot');
+  const txt = document.getElementById('stext');
+  try {
+    const r = await fetch(`${API}/health`, { signal: AbortSignal.timeout(3000) });
+    if (r.ok) { dot.className='sdot on'; txt.textContent='api online'; }
+    else throw 0;
+  } catch { dot.className='sdot off'; txt.textContent='api offline'; }
+}
+
+async function loadStats() {
+  try {
+    const r = await fetch(`${API}/collection/stats`);
+    const d = await r.json();
+    document.getElementById('s-chunks').textContent  = d.total_chunks ?? '—';
+    document.getElementById('s-srcs').textContent    = d.sources?.length ?? '—';
+    document.getElementById('tmeta').textContent =
+      `${d.total_chunks} chunks · ${d.sources?.length} sources`;
+    renderSourceList(d.sources || []);
+  } catch {}
+}
+
+function renderSourceList(sources) {
+  const el = document.getElementById('src-list');
+  if (!sources.length) {
+    el.innerHTML = '<div style="font-size:11px;color:var(--text3);font-family:var(--mono)">no sources yet</div>';
+    return;
+  }
+  el.innerHTML = sources.map(s => {
+    const name = s.split(/[\\/]/).pop();
+    const icon = fileIcon(name);
+    return `<div class="src-item"><div class="src-dot"></div><span title="${esc(s)}">${icon} ${esc(name)}</span></div>`;
+  }).join('');
+}
+
+// ── Drag & Drop ───────────────────────────────────────────────────────────
+function onDragOver(e) {
+  e.preventDefault();
+  document.getElementById('drop-zone').classList.add('drag');
+}
+function onDragLeave(e) {
+  document.getElementById('drop-zone').classList.remove('drag');
+}
+function onDrop(e) {
+  e.preventDefault();
+  document.getElementById('drop-zone').classList.remove('drag');
+  addFiles([...e.dataTransfer.files]);
+}
+function onFilePicked(e) {
+  addFiles([...e.target.files]);
+  e.target.value = '';
+}
+
+function addFiles(files) {
+  for (const f of files) {
+    // Deduplicate by name
+    if (fileQueue.find(q => q.file.name === f.name)) continue;
+    fileQueue.push({ file: f, status: 'pending', chunks: 0 });
+  }
+  renderQueue();
+  document.getElementById('ingest-btn').disabled = !fileQueue.some(q => q.status === 'pending');
+}
+
+function removeFile(idx) {
+  fileQueue.splice(idx, 1);
+  renderQueue();
+  document.getElementById('ingest-btn').disabled = !fileQueue.some(q => q.status === 'pending');
+}
+
+function renderQueue() {
+  const el = document.getElementById('file-queue');
+  if (!fileQueue.length) { el.innerHTML=''; return; }
+  el.innerHTML = fileQueue.map((q, i) => {
+    const icon = fileIcon(q.file.name);
+    const size = (q.file.size / 1024).toFixed(1) + ' KB';
+    const statusText = {
+      pending: 'ready',
+      uploading: 'uploading...',
+      done: `done · ${q.chunks} chunks`,
+      error: 'error',
+    }[q.status];
+    const canRemove = q.status !== 'uploading';
+    return `<div class="fitem">
+      <div class="ficon">${icon}</div>
+      <div class="finfo">
+        <div class="fname" title="${esc(q.file.name)}">${esc(q.file.name)}</div>
+        <div class="fsize">${size}</div>
+      </div>
+      <span class="fstatus ${q.status}">${statusText}</span>
+      ${canRemove ? `<button class="fremove" onclick="removeFile(${i})" title="Remove">✕</button>` : ''}
+    </div>`;
+  }).join('');
+}
+
+// ── Ingest ────────────────────────────────────────────────────────────────
+async function ingestAll() {
+  const pending = fileQueue.filter(q => q.status === 'pending');
+  if (!pending.length) return;
+
+  document.getElementById('ingest-btn').disabled = true;
+
+  for (const item of pending) {
+    item.status = 'uploading';
+    renderQueue();
+
+    const form = new FormData();
+    form.append('file', item.file);
+
+    // Choose endpoint: image vs document
+    const ext = item.file.name.split('.').pop().toLowerCase();
+    const isImage = ['png','jpg','jpeg','webp'].includes(ext);
+    const endpoint = isImage ? `${API}/ingest/image` : `${API}/ingest/file`;
+
+    try {
+      const r = await fetch(endpoint, { method: 'POST', body: form });
+      if (!r.ok) {
+        const e = await r.json().catch(() => ({}));
+        throw new Error(e.detail || r.statusText);
+      }
+      const d = await r.json();
+      item.status = 'done';
+      item.chunks = d.chunks_stored;
+      showToast(`${item.file.name} ingested → ${d.chunks_stored} chunks`);
+    } catch (err) {
+      item.status = 'error';
+      item.error = err.message;
+      showToast(`Failed: ${item.file.name} — ${err.message}`, true);
+    }
+    renderQueue();
+  }
+
+  await loadStats();
+  document.getElementById('ingest-btn').disabled = !fileQueue.some(q => q.status === 'pending');
+}
+
+// ── Query ─────────────────────────────────────────────────────────────────
+function handleKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendQuery(); }
+}
+function autoResize(el) {
+  el.style.height='auto'; el.style.height=Math.min(el.scrollHeight,120)+'px';
+}
+function ask(q) {
+  document.getElementById('query').value = q; sendQuery();
+}
+
+async function sendQuery() {
+  const ta = document.getElementById('query');
+  const q  = ta.value.trim();
+  if (!q || isLoading) return;
+
+  isLoading = true;
+  document.getElementById('send-btn').disabled = true;
+  ta.value = ''; ta.style.height = 'auto';
+
+  hideEmpty();
+  appendUser(q);
+  const aiEl = appendTyping();
+
+  const topK   = parseInt(document.getElementById('cfg-topk').value);
+  const model  = document.getElementById('cfg-model').value || null;
+  const stream = document.getElementById('cfg-stream').value === 'true';
+
+  try {
+    if (stream) await queryStream(q, topK, model, aiEl);
+    else        await querySync(q, topK, model, aiEl);
+  } catch(err) {
+    replaceTyping(aiEl, `<div class="errmsg">Error: ${err.message}. Is the API server running on port 8000?</div>`);
+  } finally {
+    isLoading = false;
+    document.getElementById('send-btn').disabled = false;
+    ta.focus();
+  }
+  await loadStats();
+}
+
+async function querySync(q, topK, model, aiEl) {
+  const body = { question: q, top_k: topK };
+  if (model) body.llm_model = model;
+  const r = await fetch(`${API}/query`, {
+    method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body)
+  });
+  if (!r.ok) { const e=await r.json().catch(()=>({})); throw new Error(e.detail||r.statusText); }
+  const d = await r.json();
+  replaceTyping(aiEl, formatAnswer(d.answer) + renderSources(d.sources));
+}
+
+async function queryStream(q, topK, model, aiEl) {
+  const body = { question: q, top_k: topK, stream: true };
+  if (model) body.llm_model = model;
+  const r = await fetch(`${API}/query/stream`, {
+    method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body)
+  });
+  if (!r.ok) throw new Error(r.statusText);
+  const bubble = aiEl.querySelector('.bubble');
+  bubble.innerHTML = '<span class="cursor"></span>';
+  let text = '';
+  const reader = r.body.getReader();
+  const dec = new TextDecoder();
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    for (const line of dec.decode(value).split('\n')) {
+      if (!line.startsWith('data: ')) continue;
+      const tok = line.slice(6);
+      if (tok === '[DONE]') break;
+      if (tok.startsWith('[ERROR]')) throw new Error(tok.slice(8));
+      text += tok;
+      bubble.innerHTML = formatAnswer(text) + '<span class="cursor"></span>';
+      scrollBottom();
+    }
+  }
+  bubble.innerHTML = formatAnswer(text);
+  scrollBottom();
+}
+
+// ── DOM helpers ───────────────────────────────────────────────────────────
+function hideEmpty() { document.getElementById('empty')?.remove(); }
+
+function appendUser(text) {
+  const el = document.createElement('div');
+  el.className = 'msg user';
+  el.innerHTML = `<div class="av u">👤</div><div class="bubble">${esc(text)}</div>`;
+  document.getElementById('messages').appendChild(el);
+  scrollBottom();
+}
+
+function appendTyping() {
+  const el = document.createElement('div');
+  el.className = 'msg ai';
+  el.innerHTML = `<div class="av a">⚡</div><div class="bubble"><div class="typing"><span></span><span></span><span></span></div></div>`;
+  document.getElementById('messages').appendChild(el);
+  scrollBottom();
+  return el;
+}
+
+function replaceTyping(el, html) {
+  el.querySelector('.bubble').innerHTML = html;
+  scrollBottom();
+}
+
+function scrollBottom() {
+  const m = document.getElementById('messages');
+  m.scrollTop = m.scrollHeight;
+}
+
+// ── Formatting ────────────────────────────────────────────────────────────
+function formatAnswer(text) {
+  return '<p>' + text
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+    .replace(/`([^`]+)`/g,'<code>$1</code>')
+    .replace(/\n\n/g,'</p><p>')
+    .replace(/\n/g,'<br>')
+    + '</p>';
+}
+
+function renderSources(sources) {
+  if (!sources?.length) return '';
+  const chips = sources.map(s => {
+    const name = (s.filename || s.source?.split(/[\\/]/).pop() || 'unknown');
+    const score = s.score != null ? (s.score*100).toFixed(0)+'%' : '';
+    return `<div class="chip">${fileIcon(name)} ${esc(name)}${score?`<span class="sc">${score}</span>`:''}</div>`;
+  }).join('');
+  return `<div class="srcs"><div class="srcs-lbl">Sources</div>${chips}</div>`;
+}
+
+function fileIcon(name) {
+  const ext = name.split('.').pop().toLowerCase();
+  return {pdf:'📄',docx:'📝',doc:'📝',txt:'📃',md:'📋',csv:'📊',png:'🖼',jpg:'🖼',jpeg:'🖼'}[ext] || '📁';
+}
+
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function newChat() {
+  document.getElementById('messages').innerHTML = `
+    <div class="empty" id="empty">
+      <div class="empty-icon">🔍</div>
+      <div class="empty-title">Ready to answer</div>
+      <div class="empty-desc">Upload documents in the sidebar, click Ingest, then ask anything.</div>
+      <div class="sugs">
+        <div class="sug" onclick="ask('What is RAG and how does hybrid retrieval work?')">What is RAG?</div>
+        <div class="sug" onclick="ask('What are the RAGAS scores for Groq with hybrid retrieval?')">RAGAS scores</div>
+        <div class="sug" onclick="ask('What is the context window of Llama 4 Scout?')">Llama 4 Scout specs</div>
+        <div class="sug" onclick="ask('Which vector database should I use for production?')">Best vector DB</div>
+        <div class="sug" onclick="ask('Summarize all the documents in the index')">Summarize documents</div>
+      </div>
+    </div>`;
+}
+
+// ── Toast ─────────────────────────────────────────────────────────────────
+function showToast(msg, isError=false) {
+  const t = document.createElement('div');
+  t.className = 'toast';
+  if (isError) t.style.borderColor = 'var(--red)', t.style.color = 'var(--red)';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 3500);
+}
+
+init();
+</script>
+</body>
+</html>

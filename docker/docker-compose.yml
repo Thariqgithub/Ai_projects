@@ -1,0 +1,117 @@
+version: "3.9"
+
+services:
+  # ── FastAPI Application ──────────────────────────────────────────────────── #
+  api:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: rag_api
+    ports:
+      - "8000:8000"
+    env_file:
+      - ../.env
+    environment:
+      - CHROMA_PERSIST_DIR=/app/chroma_db
+      - DATA_DIR=/app/data
+      - DOCUMENTS_DIR=/app/data/documents
+      - IMAGES_DIR=/app/data/images
+      - VIDEOS_DIR=/app/data/videos
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+    volumes:
+      - chroma_data:/app/chroma_db
+      - doc_data:/app/data
+      - ../:/app  # mount source for development (remove in prod)
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/v1/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+  # ── Celery Worker ────────────────────────────────────────────────────────── #
+  worker:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: rag_worker
+    command: celery -A workers.celery_worker worker --loglevel=info --concurrency=2
+    env_file:
+      - ../.env
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+      - CHROMA_PERSIST_DIR=/app/chroma_db
+    volumes:
+      - chroma_data:/app/chroma_db
+      - doc_data:/app/data
+      - ../:/app
+    depends_on:
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # ── Celery Beat (optional scheduler) ────────────────────────────────────── #
+  beat:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: rag_beat
+    command: celery -A workers.celery_worker beat --loglevel=info
+    env_file:
+      - ../.env
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+    volumes:
+      - ../:/app
+    depends_on:
+      - redis
+    restart: unless-stopped
+    profiles:
+      - scheduler
+
+  # ── Flower (Celery monitoring UI) ───────────────────────────────────────── #
+  flower:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: rag_flower
+    command: celery -A workers.celery_worker flower --port=5555
+    ports:
+      - "5555:5555"
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+    depends_on:
+      - redis
+    restart: unless-stopped
+    profiles:
+      - monitoring
+
+  # ── Redis ────────────────────────────────────────────────────────────────── #
+  redis:
+    image: redis:7-alpine
+    container_name: rag_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+
+volumes:
+  chroma_data:
+  doc_data:
+  redis_data:

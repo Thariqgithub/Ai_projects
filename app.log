@@ -1,0 +1,461 @@
+2026-03-17 11:35:29 | INFO     | api.main | Starting Multi-Model RAG API v1.0.0
+2026-03-17 11:35:29 | INFO     | api.main | Directories initialized
+2026-03-17 11:36:53 | INFO     | api.main | Shutting down application
+2026-03-17 11:37:13 | INFO     | ingest_documents | Initializing RAG pipeline...
+2026-03-17 11:37:14 | INFO     | vectorstore.chroma_client | ChromaDB initialized: collection='rag_documents', persist_dir='./chroma_db', existing_docs=0
+2026-03-17 11:37:14 | INFO     | ingest_documents | Ingesting directory: D:\multi_model_rag\data\documents
+2026-03-17 11:37:14 | INFO     | rag.rag_pipeline | Ingesting directory: D:\multi_model_rag\data\documents
+2026-03-17 11:37:14 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\gemini_embeddings_guide.md (0.01 MB)
+2026-03-17 11:37:14 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\groq_llama4_scout.txt (0.00 MB)
+2026-03-17 11:37:14 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\intro_to_llms.pdf (0.00 MB)
+2026-03-17 11:37:14 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\rag_benchmark_results.csv (0.00 MB)
+2026-03-17 11:37:14 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\rag_systems_deep_dive.pdf (0.01 MB)
+2026-03-17 11:37:14 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\vector_databases_comparison.pdf (0.00 MB)
+2026-03-17 11:37:14 | INFO     | ingestion.loader | Loaded 6 documents from D:\multi_model_rag\data\documents
+2026-03-17 11:37:14 | INFO     | ingestion.chunker | Total chunks produced: 50
+2026-03-17 11:37:14 | INFO     | embeddings.gemini_embeddings | Embedding 50 texts in 2 batches
+2026-03-17 11:37:15 | WARNING  | utils.helpers | Attempt 1 failed for _embed_batch: 404 models/gemini-embedding-exp-03-07 is not found for API version v1beta, or is not supported for embedContent. Call ListModels to see the list of available models and their supported methods.. Retrying in 2.0s...
+2026-03-17 11:37:17 | WARNING  | utils.helpers | Attempt 2 failed for _embed_batch: 404 models/gemini-embedding-exp-03-07 is not found for API version v1beta, or is not supported for embedContent. Call ListModels to see the list of available models and their supported methods.. Retrying in 2.0s...
+2026-03-17 11:37:19 | ERROR    | utils.helpers | All 3 attempts failed for _embed_batch: 404 models/gemini-embedding-exp-03-07 is not found for API version v1beta, or is not supported for embedContent. Call ListModels to see the list of available models and their supported methods.
+2026-03-17 12:39:20 | INFO     | ingest_documents | Initializing RAG pipeline...
+2026-03-17 12:39:21 | INFO     | vectorstore.chroma_client | ChromaDB initialized: collection='rag_documents', persist_dir='./chroma_db', existing_docs=0
+2026-03-17 12:39:21 | INFO     | ingest_documents | Ingesting directory: D:\multi_model_rag\data\documents
+2026-03-17 12:39:21 | INFO     | rag.rag_pipeline | Ingesting directory: D:\multi_model_rag\data\documents
+2026-03-17 12:39:21 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\gemini_embeddings_guide.md (0.01 MB)
+2026-03-17 12:39:21 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\groq_llama4_scout.txt (0.00 MB)
+2026-03-17 12:39:21 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\intro_to_llms.pdf (0.00 MB)
+2026-03-17 12:39:21 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\rag_benchmark_results.csv (0.00 MB)
+2026-03-17 12:39:21 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\rag_systems_deep_dive.pdf (0.01 MB)
+2026-03-17 12:39:21 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\vector_databases_comparison.pdf (0.00 MB)
+2026-03-17 12:39:21 | INFO     | ingestion.loader | Loaded 6 documents from D:\multi_model_rag\data\documents
+2026-03-17 12:39:21 | INFO     | ingestion.chunker | Total chunks produced: 50
+2026-03-17 12:39:21 | INFO     | embeddings.gemini_embeddings | Embedding 50 texts in 2 batches (model=gemini-embedding-2-preview)
+2026-03-17 12:39:21 | WARNING  | utils.helpers | Attempt 1 failed for _embed_batch: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'API key not valid. Please pass a valid API key.', 'status': 'INVALID_ARGUMENT', 'details': [{'@type': 'type.googleapis.com/google.rpc.ErrorInfo', 'reason': 'API_KEY_INVALID', 'domain': 'googleapis.com', 'metadata': {'service': 'generativelanguage.googleapis.com'}}, {'@type': 'type.googleapis.com/google.rpc.LocalizedMessage', 'locale': 'en-US', 'message': 'API key not valid. Please pass a valid API key.'}]}}. Retrying in 2.0s...
+2026-03-17 12:39:23 | WARNING  | utils.helpers | Attempt 2 failed for _embed_batch: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'API key not valid. Please pass a valid API key.', 'status': 'INVALID_ARGUMENT', 'details': [{'@type': 'type.googleapis.com/google.rpc.ErrorInfo', 'reason': 'API_KEY_INVALID', 'domain': 'googleapis.com', 'metadata': {'service': 'generativelanguage.googleapis.com'}}, {'@type': 'type.googleapis.com/google.rpc.LocalizedMessage', 'locale': 'en-US', 'message': 'API key not valid. Please pass a valid API key.'}]}}. Retrying in 2.0s...
+2026-03-17 12:39:26 | ERROR    | utils.helpers | All 3 attempts failed for _embed_batch: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'API key not valid. Please pass a valid API key.', 'status': 'INVALID_ARGUMENT', 'details': [{'@type': 'type.googleapis.com/google.rpc.ErrorInfo', 'reason': 'API_KEY_INVALID', 'domain': 'googleapis.com', 'metadata': {'service': 'generativelanguage.googleapis.com'}}, {'@type': 'type.googleapis.com/google.rpc.LocalizedMessage', 'locale': 'en-US', 'message': 'API key not valid. Please pass a valid API key.'}]}}
+2026-03-17 12:42:34 | INFO     | ingest_documents | Initializing RAG pipeline...
+2026-03-17 12:42:35 | INFO     | vectorstore.chroma_client | ChromaDB initialized: collection='rag_documents', persist_dir='./chroma_db', existing_docs=0
+2026-03-17 12:42:35 | INFO     | ingest_documents | Ingesting directory: D:\multi_model_rag\data\documents
+2026-03-17 12:42:35 | INFO     | rag.rag_pipeline | Ingesting directory: D:\multi_model_rag\data\documents
+2026-03-17 12:42:35 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\gemini_embeddings_guide.md (0.01 MB)
+2026-03-17 12:42:35 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\groq_llama4_scout.txt (0.00 MB)
+2026-03-17 12:42:35 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\intro_to_llms.pdf (0.00 MB)
+2026-03-17 12:42:35 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\rag_benchmark_results.csv (0.00 MB)
+2026-03-17 12:42:35 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\rag_systems_deep_dive.pdf (0.01 MB)
+2026-03-17 12:42:35 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\vector_databases_comparison.pdf (0.00 MB)
+2026-03-17 12:42:35 | INFO     | ingestion.loader | Loaded 6 documents from D:\multi_model_rag\data\documents
+2026-03-17 12:42:35 | INFO     | ingestion.chunker | Total chunks produced: 50
+2026-03-17 12:42:35 | INFO     | embeddings.gemini_embeddings | Embedding 50 texts in 2 batches (model=gemini-embedding-2-preview)
+2026-03-17 12:42:35 | WARNING  | utils.helpers | Attempt 1 failed for _embed_batch: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'API key not valid. Please pass a valid API key.', 'status': 'INVALID_ARGUMENT', 'details': [{'@type': 'type.googleapis.com/google.rpc.ErrorInfo', 'reason': 'API_KEY_INVALID', 'domain': 'googleapis.com', 'metadata': {'service': 'generativelanguage.googleapis.com'}}, {'@type': 'type.googleapis.com/google.rpc.LocalizedMessage', 'locale': 'en-US', 'message': 'API key not valid. Please pass a valid API key.'}]}}. Retrying in 2.0s...
+2026-03-17 12:42:38 | WARNING  | utils.helpers | Attempt 2 failed for _embed_batch: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'API key not valid. Please pass a valid API key.', 'status': 'INVALID_ARGUMENT', 'details': [{'@type': 'type.googleapis.com/google.rpc.ErrorInfo', 'reason': 'API_KEY_INVALID', 'domain': 'googleapis.com', 'metadata': {'service': 'generativelanguage.googleapis.com'}}, {'@type': 'type.googleapis.com/google.rpc.LocalizedMessage', 'locale': 'en-US', 'message': 'API key not valid. Please pass a valid API key.'}]}}. Retrying in 2.0s...
+2026-03-17 12:42:40 | ERROR    | utils.helpers | All 3 attempts failed for _embed_batch: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'API key not valid. Please pass a valid API key.', 'status': 'INVALID_ARGUMENT', 'details': [{'@type': 'type.googleapis.com/google.rpc.ErrorInfo', 'reason': 'API_KEY_INVALID', 'domain': 'googleapis.com', 'metadata': {'service': 'generativelanguage.googleapis.com'}}, {'@type': 'type.googleapis.com/google.rpc.LocalizedMessage', 'locale': 'en-US', 'message': 'API key not valid. Please pass a valid API key.'}]}}
+2026-03-17 12:43:36 | INFO     | ingest_documents | Initializing RAG pipeline...
+2026-03-17 12:43:36 | INFO     | vectorstore.chroma_client | ChromaDB initialized: collection='rag_documents', persist_dir='./chroma_db', existing_docs=0
+2026-03-17 12:43:36 | INFO     | ingest_documents | Ingesting directory: D:\multi_model_rag\data\documents
+2026-03-17 12:43:36 | INFO     | rag.rag_pipeline | Ingesting directory: D:\multi_model_rag\data\documents
+2026-03-17 12:43:36 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\gemini_embeddings_guide.md (0.01 MB)
+2026-03-17 12:43:36 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\groq_llama4_scout.txt (0.00 MB)
+2026-03-17 12:43:36 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\intro_to_llms.pdf (0.00 MB)
+2026-03-17 12:43:36 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\rag_benchmark_results.csv (0.00 MB)
+2026-03-17 12:43:36 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\rag_systems_deep_dive.pdf (0.01 MB)
+2026-03-17 12:43:36 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\vector_databases_comparison.pdf (0.00 MB)
+2026-03-17 12:43:36 | INFO     | ingestion.loader | Loaded 6 documents from D:\multi_model_rag\data\documents
+2026-03-17 12:43:36 | INFO     | ingestion.chunker | Total chunks produced: 50
+2026-03-17 12:43:36 | INFO     | embeddings.gemini_embeddings | Embedding 50 texts in 2 batches (model=gemini-embedding-2-preview)
+2026-03-17 12:43:43 | INFO     | embeddings.gemini_embeddings | Generated embeddings for 50 chunks (dim=3072)
+2026-03-17 12:43:43 | INFO     | vectorstore.chroma_client | Upserted 50 chunks into ChromaDB
+2026-03-17 12:43:43 | INFO     | rag.rag_pipeline | Ingested 50 total chunks from D:\multi_model_rag\data\documents
+2026-03-17 12:43:43 | INFO     | ingest_documents | Done in 6.8s | Total chunks in DB: 50 | Sources: 6
+2026-03-17 12:46:20 | INFO     | ingest_documents | Initializing RAG pipeline...
+2026-03-17 12:46:20 | INFO     | vectorstore.chroma_client | ChromaDB initialized: collection='rag_documents', persist_dir='./chroma_db', existing_docs=50
+2026-03-17 12:46:21 | INFO     | ingest_documents | Ingesting directory: D:\multi_model_rag\data\documents
+2026-03-17 12:46:21 | INFO     | rag.rag_pipeline | Ingesting directory: D:\multi_model_rag\data\documents
+2026-03-17 12:46:21 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\gemini_embeddings_guide.md (0.01 MB)
+2026-03-17 12:46:21 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\groq_llama4_scout.txt (0.00 MB)
+2026-03-17 12:46:21 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\intro_to_llms.pdf (0.00 MB)
+2026-03-17 12:46:21 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\rag_benchmark_results.csv (0.00 MB)
+2026-03-17 12:46:21 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\rag_systems_deep_dive.pdf (0.01 MB)
+2026-03-17 12:46:21 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\vector_databases_comparison.pdf (0.00 MB)
+2026-03-17 12:46:21 | INFO     | ingestion.loader | Loaded 6 documents from D:\multi_model_rag\data\documents
+2026-03-17 12:46:21 | INFO     | ingestion.chunker | Total chunks produced: 50
+2026-03-17 12:46:21 | INFO     | embeddings.gemini_embeddings | Embedding 50 texts in 2 batches (model=gemini-embedding-2-preview)
+2026-03-17 12:46:27 | INFO     | embeddings.gemini_embeddings | Generated embeddings for 50 chunks (dim=3072)
+2026-03-17 12:46:27 | INFO     | vectorstore.chroma_client | Upserted 50 chunks into ChromaDB
+2026-03-17 12:46:27 | INFO     | rag.rag_pipeline | Ingested 50 total chunks from D:\multi_model_rag\data\documents
+2026-03-17 12:46:27 | INFO     | ingest_documents | Done in 6.2s | Total chunks in DB: 50 | Sources: 6
+2026-03-17 12:51:37 | INFO     | ingest_documents | Initializing RAG pipeline...
+2026-03-17 12:51:37 | INFO     | vectorstore.chroma_client | ChromaDB initialized: collection='rag_documents', persist_dir='./chroma_db', existing_docs=50
+2026-03-17 12:51:37 | INFO     | ingest_documents | Ingesting directory: D:\multi_model_rag\data\documents
+2026-03-17 12:51:37 | INFO     | rag.rag_pipeline | Ingesting directory: D:\multi_model_rag\data\documents
+2026-03-17 12:51:37 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\gemini_embeddings_guide.md (0.01 MB)
+2026-03-17 12:51:37 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\groq_llama4_scout.txt (0.00 MB)
+2026-03-17 12:51:37 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\intro_to_llms.pdf (0.00 MB)
+2026-03-17 12:51:37 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\rag_benchmark_results.csv (0.00 MB)
+2026-03-17 12:51:37 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\rag_systems_deep_dive.pdf (0.01 MB)
+2026-03-17 12:51:37 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\vector_databases_comparison.pdf (0.00 MB)
+2026-03-17 12:51:37 | INFO     | ingestion.loader | Loaded 6 documents from D:\multi_model_rag\data\documents
+2026-03-17 12:51:37 | INFO     | ingestion.chunker | Total chunks produced: 50
+2026-03-17 12:51:37 | INFO     | embeddings.gemini_embeddings | Embedding 50 texts in 2 batches (model=gemini-embedding-2-preview)
+2026-03-17 12:51:44 | INFO     | embeddings.gemini_embeddings | Generated embeddings for 50 chunks (dim=3072)
+2026-03-17 12:51:44 | INFO     | vectorstore.chroma_client | Upserted 50 chunks into ChromaDB
+2026-03-17 12:51:44 | INFO     | rag.rag_pipeline | Ingested 50 total chunks from D:\multi_model_rag\data\documents
+2026-03-17 12:51:44 | INFO     | ingest_documents | Done in 6.8s | Total chunks in DB: 50 | Sources: 6
+2026-03-17 12:55:51 | INFO     | ingest_documents | Initializing RAG pipeline...
+2026-03-17 12:55:51 | INFO     | vectorstore.chroma_client | ChromaDB initialized: collection='rag_documents', persist_dir='./chroma_db', existing_docs=50
+2026-03-17 12:55:51 | INFO     | ingest_documents | Ingesting directory: D:\multi_model_rag\data\documents
+2026-03-17 12:55:51 | INFO     | rag.rag_pipeline | Ingesting directory: D:\multi_model_rag\data\documents
+2026-03-17 12:55:51 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\gemini_embeddings_guide.md (0.01 MB)
+2026-03-17 12:55:51 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\groq_llama4_scout.txt (0.00 MB)
+2026-03-17 12:55:51 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\intro_to_llms.pdf (0.00 MB)
+2026-03-17 12:55:51 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\rag_benchmark_results.csv (0.00 MB)
+2026-03-17 12:55:51 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\rag_systems_deep_dive.pdf (0.01 MB)
+2026-03-17 12:55:51 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\vector_databases_comparison.pdf (0.00 MB)
+2026-03-17 12:55:51 | INFO     | ingestion.loader | Loaded 6 documents from D:\multi_model_rag\data\documents
+2026-03-17 12:55:51 | INFO     | ingestion.chunker | Total chunks produced: 50
+2026-03-17 12:55:51 | INFO     | embeddings.gemini_embeddings | Embedding 50 texts in 2 batches (model=gemini-embedding-2-preview)
+2026-03-17 12:55:58 | INFO     | embeddings.gemini_embeddings | Generated embeddings for 50 chunks (dim=3072)
+2026-03-17 12:55:58 | INFO     | vectorstore.chroma_client | Upserted 50 chunks into ChromaDB
+2026-03-17 12:55:58 | INFO     | rag.rag_pipeline | Ingested 50 total chunks from D:\multi_model_rag\data\documents
+2026-03-17 12:55:58 | INFO     | ingest_documents | ✓ Stored 50 total chunks from directory
+2026-03-17 12:55:58 | INFO     | ingest_documents | Done in 6.9s | Total chunks in DB: 50 | Sources: 6
+2026-03-17 13:04:54 | INFO     | api.main | Starting Multi-Model RAG API v1.0.0
+2026-03-17 13:04:54 | INFO     | api.main | Directories initialized
+2026-03-17 13:05:38 | INFO     | api.main | Shutting down application
+2026-03-17 15:05:42 | INFO     | api.main | Starting Multi-Model RAG API v1.0.0
+2026-03-17 15:05:42 | INFO     | api.main | Directories initialized
+2026-03-17 15:08:50 | INFO     | api.main | Shutting down application
+2026-03-17 15:09:43 | INFO     | api.main | Starting Multi-Model RAG API v1.0.0
+2026-03-17 15:09:43 | INFO     | api.main | Directories initialized
+2026-03-17 15:10:02 | INFO     | api.main | Shutting down application
+2026-03-17 15:31:40 | INFO     | api.main | Starting Multi-Model RAG API v1.0.0
+2026-03-17 15:31:40 | INFO     | api.main | Directories initialized
+2026-03-17 15:33:20 | INFO     | api.main | Shutting down application
+2026-03-17 15:41:21 | INFO     | api.main | Starting Multi-Model RAG API v1.0.0
+2026-03-17 15:41:21 | INFO     | api.main | Directories initialized
+2026-03-17 15:43:16 | INFO     | vectorstore.chroma_client | ChromaDB initialized: collection='rag_documents', persist_dir='./chroma_db', existing_docs=50
+2026-03-17 15:43:18 | INFO     | rag.rag_pipeline | RAG query: 'What is RAG and how does hybrid retrieval work?...'
+2026-03-17 15:43:18 | INFO     | retrieval.retriever | Dense retrieval: query='What is RAG and how does hybrid retrieval work?...', top_k=20
+2026-03-17 15:43:19 | INFO     | retrieval.hybrid_search | BM25 index built over 50 chunks
+2026-03-17 15:43:19 | INFO     | retrieval.reranker | Reranking 10 chunks with Cohere (top_n=5)
+2026-03-17 15:43:22 | INFO     | router.llm_router | LLM routing to: groq
+2026-03-17 15:44:47 | INFO     | rag.rag_pipeline | RAG query: 'What is CHORMA DB?...'
+2026-03-17 15:44:47 | INFO     | retrieval.retriever | Dense retrieval: query='What is CHORMA DB?...', top_k=20
+2026-03-17 15:44:48 | INFO     | retrieval.reranker | Reranking 10 chunks with Cohere (top_n=5)
+2026-03-17 15:44:48 | INFO     | router.llm_router | LLM routing to: groq
+2026-03-17 16:05:57 | INFO     | rag.rag_pipeline | RAG query: 'explain the rag benchmark?...'
+2026-03-17 16:05:57 | INFO     | retrieval.retriever | Dense retrieval: query='explain the rag benchmark?...', top_k=20
+2026-03-17 16:05:58 | INFO     | retrieval.reranker | Reranking 10 chunks with Cohere (top_n=5)
+2026-03-17 16:05:59 | INFO     | router.llm_router | LLM routing to: groq
+2026-03-17 16:06:36 | INFO     | rag.rag_pipeline | RAG query: 'give the rag benchmark graph?...'
+2026-03-17 16:06:36 | INFO     | retrieval.retriever | Dense retrieval: query='give the rag benchmark graph?...', top_k=20
+2026-03-17 16:06:36 | INFO     | retrieval.reranker | Reranking 10 chunks with Cohere (top_n=5)
+2026-03-17 16:06:37 | INFO     | router.llm_router | LLM routing to: groq
+2026-03-17 16:07:31 | INFO     | rag.rag_pipeline | RAG query: 'explain rag pipeline architecture?...'
+2026-03-17 16:07:31 | INFO     | retrieval.retriever | Dense retrieval: query='explain rag pipeline architecture?...', top_k=20
+2026-03-17 16:07:32 | INFO     | retrieval.reranker | Reranking 10 chunks with Cohere (top_n=5)
+2026-03-17 16:07:32 | INFO     | router.llm_router | LLM routing to: groq
+2026-03-17 16:35:27 | INFO     | api.main | Shutting down application
+2026-03-18 11:05:53 | INFO     | api.main | Starting Multi-Model RAG API v1.0.0
+2026-03-18 11:05:53 | INFO     | api.main | Directories initialized
+2026-03-18 11:08:19 | INFO     | vectorstore.chroma_client | ChromaDB initialized: collection='rag_documents', persist_dir='./chroma_db', existing_docs=50
+2026-03-18 11:08:20 | INFO     | rag.rag_pipeline | RAG query: 'explain the model_spec_card.png?...'
+2026-03-18 11:08:20 | INFO     | retrieval.retriever | Dense retrieval: query='explain the model_spec_card.png?...', top_k=20
+2026-03-18 11:08:22 | INFO     | retrieval.hybrid_search | BM25 index built over 50 chunks
+2026-03-18 11:08:22 | INFO     | retrieval.reranker | Reranking 10 chunks with Cohere (top_n=5)
+2026-03-18 11:08:22 | INFO     | router.llm_router | LLM routing to: groq
+2026-03-18 11:10:03 | INFO     | rag.rag_pipeline | RAG query: 'give the table of Evaluation Metrics (RAGAS)?...'
+2026-03-18 11:10:03 | INFO     | retrieval.retriever | Dense retrieval: query='give the table of Evaluation Metrics (RAGAS)?...', top_k=20
+2026-03-18 11:10:04 | INFO     | retrieval.reranker | Reranking 10 chunks with Cohere (top_n=5)
+2026-03-18 11:10:04 | INFO     | router.llm_router | LLM routing to: groq
+2026-03-18 11:14:40 | INFO     | api.main | Shutting down application
+2026-03-18 11:14:45 | INFO     | api.main | Starting Multi-Model RAG API v1.0.0
+2026-03-18 11:14:45 | INFO     | api.main | Directories initialized
+2026-03-18 11:14:45 | INFO     | api.main | Shutting down application
+2026-03-18 11:15:08 | INFO     | rebuild_index | Initializing RAG pipeline...
+2026-03-18 11:15:08 | INFO     | vectorstore.chroma_client | ChromaDB initialized: collection='rag_documents', persist_dir='./chroma_db', existing_docs=50
+2026-03-18 11:15:08 | WARNING  | rebuild_index | Deleting ChromaDB collection: rag_documents
+2026-03-18 11:15:08 | WARNING  | vectorstore.chroma_client | Deleted collection: rag_documents
+2026-03-18 11:15:08 | INFO     | vectorstore.chroma_client | ChromaDB initialized: collection='rag_documents', persist_dir='./chroma_db', existing_docs=0
+2026-03-18 11:15:08 | INFO     | rebuild_index | Re-ingesting documents from: D:\multi_model_rag\data\documents
+2026-03-18 11:15:08 | INFO     | rag.rag_pipeline | Ingesting directory: D:\multi_model_rag\data\documents
+2026-03-18 11:15:08 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\gemini_embeddings_guide.md (0.01 MB)
+2026-03-18 11:15:08 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\groq_llama4_scout.txt (0.00 MB)
+2026-03-18 11:15:08 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\intro_to_llms.pdf (0.00 MB)
+2026-03-18 11:15:08 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\rag_benchmark_results.csv (0.00 MB)
+2026-03-18 11:15:08 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\rag_systems_deep_dive.pdf (0.01 MB)
+2026-03-18 11:15:08 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\documents\vector_databases_comparison.pdf (0.00 MB)
+2026-03-18 11:15:08 | INFO     | ingestion.loader | Loaded 6 documents from D:\multi_model_rag\data\documents
+2026-03-18 11:15:08 | INFO     | ingestion.chunker | Total chunks produced: 50
+2026-03-18 11:15:08 | INFO     | embeddings.gemini_embeddings | Embedding 50 texts in 2 batches (model=gemini-embedding-2-preview)
+2026-03-18 11:15:13 | INFO     | embeddings.gemini_embeddings | Generated embeddings for 50 chunks (dim=3072)
+2026-03-18 11:15:13 | INFO     | vectorstore.chroma_client | Upserted 50 chunks into ChromaDB
+2026-03-18 11:15:13 | INFO     | rag.rag_pipeline | Ingested 50 total chunks from D:\multi_model_rag\data\documents
+2026-03-18 11:15:13 | INFO     | rebuild_index | Index rebuild complete | Chunks stored: 50 | Sources: 6
+2026-03-18 11:17:24 | INFO     | ingest_documents | Initializing RAG pipeline...
+2026-03-18 11:17:25 | INFO     | vectorstore.chroma_client | ChromaDB initialized: collection='rag_documents', persist_dir='./chroma_db', existing_docs=50
+2026-03-18 11:17:25 | INFO     | ingest_documents | Ingesting directory: D:\multi_model_rag\data\images
+2026-03-18 11:17:25 | INFO     | rag.rag_pipeline | Ingesting directory: D:\multi_model_rag\data\images
+2026-03-18 11:17:25 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\images\benchmark_results_chart.png (0.02 MB)
+2026-03-18 11:17:26 | WARNING  | ingestion.loader | Gemini Vision failed for D:\multi_model_rag\data\images\benchmark_results_chart.png: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash\nPlease retry in 33.930325316s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.0-flash'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.0-flash'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_input_token_count', 'quotaId': 'GenerateContentInputTokensPerModelPerMinute-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.0-flash'}}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '33s'}]}}. Falling back to Tesseract OCR.
+2026-03-18 11:17:27 | ERROR    | ingestion.loader | Tesseract OCR failed for D:\multi_model_rag\data\images\benchmark_results_chart.png: tesseract is not installed or it's not in your PATH. See README file for more information.
+2026-03-18 11:17:27 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\images\model_spec_card.png (0.04 MB)
+2026-03-18 11:17:27 | WARNING  | ingestion.loader | Gemini Vision failed for D:\multi_model_rag\data\images\model_spec_card.png: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash\nPlease retry in 32.87743906s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.0-flash'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-2.0-flash', 'location': 'global'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_input_token_count', 'quotaId': 'GenerateContentInputTokensPerModelPerMinute-FreeTier', 'quotaDimensions': {'model': 'gemini-2.0-flash', 'location': 'global'}}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '32s'}]}}. Falling back to Tesseract OCR.
+2026-03-18 11:17:27 | ERROR    | ingestion.loader | Tesseract OCR failed for D:\multi_model_rag\data\images\model_spec_card.png: tesseract is not installed or it's not in your PATH. See README file for more information.
+2026-03-18 11:17:27 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\images\rag_architecture_diagram.png (0.03 MB)
+2026-03-18 11:17:27 | WARNING  | ingestion.loader | Gemini Vision failed for D:\multi_model_rag\data\images\rag_architecture_diagram.png: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash\nPlease retry in 32.537680893s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.0-flash'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.0-flash'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_input_token_count', 'quotaId': 'GenerateContentInputTokensPerModelPerMinute-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.0-flash'}}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '32s'}]}}. Falling back to Tesseract OCR.
+2026-03-18 11:17:27 | ERROR    | ingestion.loader | Tesseract OCR failed for D:\multi_model_rag\data\images\rag_architecture_diagram.png: tesseract is not installed or it's not in your PATH. See README file for more information.
+2026-03-18 11:17:27 | INFO     | ingestion.loader | Loaded 3 documents from D:\multi_model_rag\data\images
+2026-03-18 11:17:27 | INFO     | ingestion.chunker | Total chunks produced: 3
+2026-03-18 11:17:27 | INFO     | embeddings.gemini_embeddings | Embedding 3 texts in 1 batches (model=gemini-embedding-2-preview)
+2026-03-18 11:17:28 | INFO     | embeddings.gemini_embeddings | Generated embeddings for 3 chunks (dim=3072)
+2026-03-18 11:17:28 | INFO     | vectorstore.chroma_client | Upserted 3 chunks into ChromaDB
+2026-03-18 11:17:28 | INFO     | rag.rag_pipeline | Ingested 3 total chunks from D:\multi_model_rag\data\images
+2026-03-18 11:17:28 | INFO     | ingest_documents | ✓ Stored 3 total chunks from directory
+2026-03-18 11:17:28 | INFO     | ingest_documents | Done in 3.3s | Total chunks in DB: 53 | Sources: 9
+2026-03-18 11:18:35 | INFO     | api.main | Starting Multi-Model RAG API v1.0.0
+2026-03-18 11:18:35 | INFO     | api.main | Directories initialized
+2026-03-18 11:19:41 | INFO     | vectorstore.chroma_client | ChromaDB initialized: collection='rag_documents', persist_dir='./chroma_db', existing_docs=53
+2026-03-18 11:19:43 | INFO     | rag.rag_pipeline | RAG query: 'What are the RAGAS scores for Groq with hybrid retrieval?...'
+2026-03-18 11:19:43 | INFO     | retrieval.retriever | Dense retrieval: query='What are the RAGAS scores for Groq with hybrid retrieval?...', top_k=20
+2026-03-18 11:19:44 | INFO     | retrieval.hybrid_search | BM25 index built over 53 chunks
+2026-03-18 11:19:44 | INFO     | retrieval.reranker | Reranking 10 chunks with Cohere (top_n=5)
+2026-03-18 11:19:44 | INFO     | router.llm_router | LLM routing to: groq
+2026-03-18 11:21:58 | INFO     | rag.rag_pipeline | RAG query: 'What are the active parameters and context window of Llama 4 Scout??...'
+2026-03-18 11:21:58 | INFO     | retrieval.retriever | Dense retrieval: query='What are the active parameters and context window of Llama 4...', top_k=20
+2026-03-18 11:21:58 | INFO     | retrieval.reranker | Reranking 10 chunks with Cohere (top_n=5)
+2026-03-18 11:21:59 | INFO     | router.llm_router | LLM routing to: groq
+2026-03-18 11:24:23 | INFO     | rag.rag_pipeline | RAG query: 'What are the two retrieval paths shown in the RAG pipeline architecture and wher...'
+2026-03-18 11:24:23 | INFO     | retrieval.retriever | Dense retrieval: query='What are the two retrieval paths shown in the RAG pipeline a...', top_k=20
+2026-03-18 11:24:24 | INFO     | retrieval.reranker | Reranking 10 chunks with Cohere (top_n=5)
+2026-03-18 11:24:24 | INFO     | router.llm_router | LLM routing to: groq
+2026-03-18 11:27:33 | INFO     | api.main | Shutting down application
+2026-03-18 11:28:34 | INFO     | api.main | Starting Multi-Model RAG API v1.0.0
+2026-03-18 11:28:34 | INFO     | api.main | Directories initialized
+2026-03-18 11:28:50 | INFO     | vectorstore.chroma_client | ChromaDB initialized: collection='rag_documents', persist_dir='./chroma_db', existing_docs=53
+2026-03-18 11:34:15 | INFO     | vectorstore.chroma_client | Deleted 1 chunks for source: D:\multi_model_rag\data\images\rag_architecture_diagram.png
+2026-03-18 11:36:37 | INFO     | vectorstore.chroma_client | Deleted 1 chunks for source: D:\multi_model_rag\data\images\benchmark_results_chart.png
+2026-03-18 11:37:03 | INFO     | vectorstore.chroma_client | Deleted 1 chunks for source: D:\multi_model_rag\data\images\model_spec_card.png
+2026-03-18 11:37:40 | INFO     | api.main | Shutting down application
+2026-03-18 11:37:47 | INFO     | ingest_documents | Initializing RAG pipeline...
+2026-03-18 11:37:47 | INFO     | vectorstore.chroma_client | ChromaDB initialized: collection='rag_documents', persist_dir='./chroma_db', existing_docs=50
+2026-03-18 11:37:48 | INFO     | ingest_documents | Ingesting directory: D:\multi_model_rag\data\images
+2026-03-18 11:37:48 | INFO     | rag.rag_pipeline | Ingesting directory: D:\multi_model_rag\data\images
+2026-03-18 11:37:48 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\images\benchmark_results_chart.png (0.02 MB)
+2026-03-18 11:37:49 | WARNING  | ingestion.loader | Gemini Vision failed for D:\multi_model_rag\data\images\benchmark_results_chart.png: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\nPlease retry in 11.035579517s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_input_token_count', 'quotaId': 'GenerateContentInputTokensPerModelPerMinute-FreeTier', 'quotaDimensions': {'model': 'gemini-2.0-flash', 'location': 'global'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-2.0-flash', 'location': 'global'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-2.0-flash', 'location': 'global'}}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '11s'}]}}. Falling back to Tesseract OCR.
+2026-03-18 11:37:49 | ERROR    | ingestion.loader | Tesseract OCR failed for D:\multi_model_rag\data\images\benchmark_results_chart.png: tesseract is not installed or it's not in your PATH. See README file for more information.
+2026-03-18 11:37:49 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\images\model_spec_card.png (0.04 MB)
+2026-03-18 11:37:50 | WARNING  | ingestion.loader | Gemini Vision failed for D:\multi_model_rag\data\images\model_spec_card.png: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\nPlease retry in 10.289053162s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_input_token_count', 'quotaId': 'GenerateContentInputTokensPerModelPerMinute-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.0-flash'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-2.0-flash', 'location': 'global'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.0-flash'}}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '10s'}]}}. Falling back to Tesseract OCR.
+2026-03-18 11:37:50 | ERROR    | ingestion.loader | Tesseract OCR failed for D:\multi_model_rag\data\images\model_spec_card.png: tesseract is not installed or it's not in your PATH. See README file for more information.
+2026-03-18 11:37:50 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\images\rag_architecture_diagram.png (0.03 MB)
+2026-03-18 11:37:50 | WARNING  | ingestion.loader | Gemini Vision failed for D:\multi_model_rag\data\images\rag_architecture_diagram.png: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash\nPlease retry in 9.731992556s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-2.0-flash', 'location': 'global'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.0-flash'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_input_token_count', 'quotaId': 'GenerateContentInputTokensPerModelPerMinute-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.0-flash'}}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '9s'}]}}. Falling back to Tesseract OCR.
+2026-03-18 11:37:50 | ERROR    | ingestion.loader | Tesseract OCR failed for D:\multi_model_rag\data\images\rag_architecture_diagram.png: tesseract is not installed or it's not in your PATH. See README file for more information.
+2026-03-18 11:37:50 | INFO     | ingestion.loader | Loaded 3 documents from D:\multi_model_rag\data\images
+2026-03-18 11:37:50 | INFO     | ingestion.chunker | Total chunks produced: 3
+2026-03-18 11:37:50 | INFO     | embeddings.gemini_embeddings | Embedding 3 texts in 1 batches (model=gemini-embedding-2-preview)
+2026-03-18 11:37:51 | INFO     | embeddings.gemini_embeddings | Generated embeddings for 3 chunks (dim=3072)
+2026-03-18 11:37:51 | INFO     | vectorstore.chroma_client | Upserted 3 chunks into ChromaDB
+2026-03-18 11:37:51 | INFO     | rag.rag_pipeline | Ingested 3 total chunks from D:\multi_model_rag\data\images
+2026-03-18 11:37:51 | INFO     | ingest_documents | ✓ Stored 3 total chunks from directory
+2026-03-18 11:37:51 | INFO     | ingest_documents | Done in 3.5s | Total chunks in DB: 53 | Sources: 9
+2026-03-18 11:40:19 | INFO     | ingest_documents | Initializing RAG pipeline...
+2026-03-18 11:40:20 | INFO     | vectorstore.chroma_client | ChromaDB initialized: collection='rag_documents', persist_dir='./chroma_db', existing_docs=53
+2026-03-18 11:40:20 | INFO     | ingest_documents | Ingesting directory: D:\multi_model_rag\data\images
+2026-03-18 11:40:20 | INFO     | rag.rag_pipeline | Ingesting directory: D:\multi_model_rag\data\images
+2026-03-18 11:40:20 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\images\benchmark_results_chart.png (0.02 MB)
+2026-03-18 11:40:20 | INFO     | ingestion.loader | Trying Vision model 'gemini-1.5-flash' for benchmark_results_chart.png
+2026-03-18 11:40:21 | ERROR    | ingestion.loader | Vision model 'gemini-1.5-flash' failed for benchmark_results_chart.png: 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+2026-03-18 11:40:21 | INFO     | ingestion.loader | Trying Vision model 'gemini-1.5-pro' for benchmark_results_chart.png
+2026-03-18 11:40:21 | ERROR    | ingestion.loader | Vision model 'gemini-1.5-pro' failed for benchmark_results_chart.png: 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+2026-03-18 11:40:21 | INFO     | ingestion.loader | Trying Vision model 'gemini-2.0-flash' for benchmark_results_chart.png
+2026-03-18 11:40:21 | WARNING  | ingestion.loader | Model 'gemini-2.0-flash' quota exceeded for benchmark_results_chart.png. Waiting 40s then trying next model...
+2026-03-18 11:41:01 | WARNING  | ingestion.loader | All Gemini Vision models exhausted for benchmark_results_chart.png. Trying Tesseract OCR.
+2026-03-18 11:41:02 | ERROR    | ingestion.loader | Tesseract OCR failed for D:\multi_model_rag\data\images\benchmark_results_chart.png: tesseract is not installed or it's not in your PATH. See README file for more information.
+2026-03-18 11:41:02 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\images\model_spec_card.png (0.04 MB)
+2026-03-18 11:41:02 | INFO     | ingestion.loader | Trying Vision model 'gemini-1.5-flash' for model_spec_card.png
+2026-03-18 11:41:02 | ERROR    | ingestion.loader | Vision model 'gemini-1.5-flash' failed for model_spec_card.png: 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+2026-03-18 11:41:02 | INFO     | ingestion.loader | Trying Vision model 'gemini-1.5-pro' for model_spec_card.png
+2026-03-18 11:41:02 | ERROR    | ingestion.loader | Vision model 'gemini-1.5-pro' failed for model_spec_card.png: 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+2026-03-18 11:41:02 | INFO     | ingestion.loader | Trying Vision model 'gemini-2.0-flash' for model_spec_card.png
+2026-03-18 11:41:03 | WARNING  | ingestion.loader | Model 'gemini-2.0-flash' quota exceeded for model_spec_card.png. Waiting 59s then trying next model...
+2026-03-18 11:42:02 | WARNING  | ingestion.loader | All Gemini Vision models exhausted for model_spec_card.png. Trying Tesseract OCR.
+2026-03-18 11:42:02 | ERROR    | ingestion.loader | Tesseract OCR failed for D:\multi_model_rag\data\images\model_spec_card.png: tesseract is not installed or it's not in your PATH. See README file for more information.
+2026-03-18 11:42:02 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\images\rag_architecture_diagram.png (0.03 MB)
+2026-03-18 11:42:02 | INFO     | ingestion.loader | Trying Vision model 'gemini-1.5-flash' for rag_architecture_diagram.png
+2026-03-18 11:42:02 | ERROR    | ingestion.loader | Vision model 'gemini-1.5-flash' failed for rag_architecture_diagram.png: 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+2026-03-18 11:42:02 | INFO     | ingestion.loader | Trying Vision model 'gemini-1.5-pro' for rag_architecture_diagram.png
+2026-03-18 11:42:02 | ERROR    | ingestion.loader | Vision model 'gemini-1.5-pro' failed for rag_architecture_diagram.png: 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-1.5-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+2026-03-18 11:42:02 | INFO     | ingestion.loader | Trying Vision model 'gemini-2.0-flash' for rag_architecture_diagram.png
+2026-03-18 11:42:02 | WARNING  | ingestion.loader | Model 'gemini-2.0-flash' quota exceeded for rag_architecture_diagram.png. Waiting 59s then trying next model...
+2026-03-18 11:43:01 | WARNING  | ingestion.loader | All Gemini Vision models exhausted for rag_architecture_diagram.png. Trying Tesseract OCR.
+2026-03-18 11:43:02 | ERROR    | ingestion.loader | Tesseract OCR failed for D:\multi_model_rag\data\images\rag_architecture_diagram.png: tesseract is not installed or it's not in your PATH. See README file for more information.
+2026-03-18 11:43:02 | INFO     | ingestion.loader | Loaded 3 documents from D:\multi_model_rag\data\images
+2026-03-18 11:43:02 | INFO     | ingestion.chunker | Total chunks produced: 3
+2026-03-18 11:43:02 | INFO     | embeddings.gemini_embeddings | Embedding 3 texts in 1 batches (model=gemini-embedding-2-preview)
+2026-03-18 11:43:03 | INFO     | embeddings.gemini_embeddings | Generated embeddings for 3 chunks (dim=3072)
+2026-03-18 11:43:03 | INFO     | vectorstore.chroma_client | Upserted 3 chunks into ChromaDB
+2026-03-18 11:43:03 | INFO     | rag.rag_pipeline | Ingested 3 total chunks from D:\multi_model_rag\data\images
+2026-03-18 11:43:03 | INFO     | ingest_documents | ✓ Stored 3 total chunks from directory
+2026-03-18 11:43:03 | INFO     | ingest_documents | Done in 163.4s | Total chunks in DB: 56 | Sources: 9
+2026-03-18 12:22:07 | INFO     | api.main | Starting Multi-Model RAG API v1.0.0
+2026-03-18 12:22:07 | INFO     | api.main | Directories initialized
+2026-03-18 12:22:26 | INFO     | vectorstore.chroma_client | ChromaDB initialized: collection='rag_documents', persist_dir='./chroma_db', existing_docs=56
+2026-03-18 12:22:28 | INFO     | rag.rag_pipeline | RAG query: 'What is RAG and how does hybrid retrieval work?...'
+2026-03-18 12:22:28 | INFO     | retrieval.retriever | Dense retrieval: query='What is RAG and how does hybrid retrieval work?...', top_k=20
+2026-03-18 12:22:29 | INFO     | retrieval.hybrid_search | BM25 index built over 56 chunks
+2026-03-18 12:22:29 | INFO     | retrieval.reranker | Reranking 10 chunks with Cohere (top_n=5)
+2026-03-18 12:22:30 | INFO     | router.llm_router | LLM routing to: groq
+2026-03-18 12:23:06 | INFO     | api.main | Shutting down application
+2026-03-18 12:37:46 | INFO     | api.main | Starting Multi-Model RAG API v1.0.0
+2026-03-18 12:37:46 | INFO     | api.main | Directories initialized
+2026-03-18 12:38:04 | INFO     | vectorstore.chroma_client | ChromaDB initialized: collection='rag_documents', persist_dir='./chroma_db', existing_docs=56
+2026-03-18 12:40:11 | INFO     | rag.rag_pipeline | Ingesting file: ./data/documents\Rich_Dad_Poor_Dad.pdf
+2026-03-18 12:40:11 | INFO     | ingestion.loader | Loading file: ./data/documents\Rich_Dad_Poor_Dad.pdf (11.31 MB)
+2026-03-18 12:40:11 | INFO     | embeddings.gemini_embeddings | Embedding 861 texts in 27 batches (model=gemini-embedding-2-preview)
+2026-03-18 12:40:19 | WARNING  | utils.helpers | Attempt 1 failed for _embed_batch: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/embed_content_free_tier_requests, limit: 100, model: gemini-embedding-2\nPlease retry in 41.011453018s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/embed_content_free_tier_requests', 'quotaId': 'EmbedContentRequestsPerMinutePerUserPerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-embedding-2', 'location': 'global'}, 'quotaValue': '100'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '41s'}]}}. Retrying in 2.0s...
+2026-03-18 12:40:21 | WARNING  | utils.helpers | Attempt 2 failed for _embed_batch: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/embed_content_free_tier_requests, limit: 100, model: gemini-embedding-2\nPlease retry in 38.885392556s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/embed_content_free_tier_requests', 'quotaId': 'EmbedContentRequestsPerMinutePerUserPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-embedding-2'}, 'quotaValue': '100'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '38s'}]}}. Retrying in 2.0s...
+2026-03-18 12:40:23 | ERROR    | utils.helpers | All 3 attempts failed for _embed_batch: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/embed_content_free_tier_requests, limit: 100, model: gemini-embedding-2\nPlease retry in 36.770541521s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/embed_content_free_tier_requests', 'quotaId': 'EmbedContentRequestsPerMinutePerUserPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-embedding-2'}, 'quotaValue': '100'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '36s'}]}}
+2026-03-18 12:42:06 | INFO     | api.main | Shutting down application
+2026-03-18 12:43:27 | INFO     | api.main | Starting Multi-Model RAG API v1.0.0
+2026-03-18 12:43:27 | INFO     | api.main | Directories initialized
+2026-03-18 12:43:56 | INFO     | api.main | Shutting down application
+2026-03-18 12:44:01 | INFO     | api.main | Starting Multi-Model RAG API v1.0.0
+2026-03-18 12:44:01 | INFO     | api.main | Directories initialized
+2026-03-18 12:45:09 | INFO     | vectorstore.chroma_client | ChromaDB initialized: collection='rag_documents', persist_dir='./chroma_db', existing_docs=56
+2026-03-18 12:45:10 | INFO     | rag.rag_pipeline | Ingesting file: ./data/documents\Rich_Dad_Poor_Dad.pdf
+2026-03-18 12:45:10 | INFO     | ingestion.loader | Loading file: ./data/documents\Rich_Dad_Poor_Dad.pdf (11.31 MB)
+2026-03-18 12:45:10 | INFO     | embeddings.gemini_embeddings | Embedding 861 texts in 27 batches (model=gemini-embedding-2-preview)
+2026-03-18 12:45:20 | WARNING  | utils.helpers | Attempt 1 failed for _embed_batch: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/embed_content_free_tier_requests, limit: 100, model: gemini-embedding-2\nPlease retry in 39.59874428s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/embed_content_free_tier_requests', 'quotaId': 'EmbedContentRequestsPerMinutePerUserPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-embedding-2'}, 'quotaValue': '100'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '39s'}]}}. Retrying in 2.0s...
+2026-03-18 12:45:22 | WARNING  | utils.helpers | Attempt 2 failed for _embed_batch: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/embed_content_free_tier_requests, limit: 100, model: gemini-embedding-2\nPlease retry in 37.480611482s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/embed_content_free_tier_requests', 'quotaId': 'EmbedContentRequestsPerMinutePerUserPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-embedding-2'}, 'quotaValue': '100'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '37s'}]}}. Retrying in 2.0s...
+2026-03-18 12:45:24 | ERROR    | utils.helpers | All 3 attempts failed for _embed_batch: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/embed_content_free_tier_requests, limit: 100, model: gemini-embedding-2\nPlease retry in 35.351628463s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/embed_content_free_tier_requests', 'quotaId': 'EmbedContentRequestsPerMinutePerUserPerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-embedding-2'}, 'quotaValue': '100'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '35s'}]}}
+2026-03-18 12:53:28 | INFO     | api.main | Shutting down application
+2026-03-18 12:56:04 | INFO     | api.main | Starting Multi-Model RAG API v1.0.0
+2026-03-18 12:56:04 | INFO     | api.main | Directories initialized
+2026-03-18 12:56:15 | INFO     | api.routes | Saved upload to: D:\multi_model_rag\data\images\multimodal_ai_models.png (45830 bytes)
+2026-03-18 12:56:15 | INFO     | vectorstore.chroma_client | ChromaDB initialized: collection='rag_documents', persist_dir='./chroma_db', existing_docs=56
+2026-03-18 12:56:16 | INFO     | rag.rag_pipeline | Ingesting file: D:\multi_model_rag\data\images\multimodal_ai_models.png
+2026-03-18 12:56:16 | INFO     | ingestion.loader | Loading file: D:\multi_model_rag\data\images\multimodal_ai_models.png (0.04 MB)
+2026-03-18 12:56:16 | INFO     | ingestion.loader | Trying Vision model 'gemini-2.0-flash-lite' for multimodal_ai_models.png
+2026-03-18 12:56:17 | WARNING  | ingestion.loader | Model 'gemini-2.0-flash-lite' quota exceeded for multimodal_ai_models.png. Waiting 44s then trying next model...
+2026-03-18 12:57:01 | INFO     | ingestion.loader | Trying Vision model 'gemini-1.5-flash-latest' for multimodal_ai_models.png
+2026-03-18 12:57:01 | WARNING  | ingestion.loader | Model 'gemini-1.5-flash-latest' not available in this SDK version — skipping
+2026-03-18 12:57:01 | INFO     | ingestion.loader | Trying Vision model 'gemini-1.5-pro-latest' for multimodal_ai_models.png
+2026-03-18 12:57:02 | WARNING  | ingestion.loader | Model 'gemini-1.5-pro-latest' not available in this SDK version — skipping
+2026-03-18 12:57:02 | INFO     | ingestion.loader | Trying Vision model 'gemini-2.0-flash' for multimodal_ai_models.png
+2026-03-18 12:57:02 | WARNING  | ingestion.loader | Model 'gemini-2.0-flash' quota exceeded for multimodal_ai_models.png. Waiting 59s then trying next model...
+2026-03-18 12:58:01 | WARNING  | ingestion.loader | All Vision models failed for multimodal_ai_models.png. Trying Tesseract OCR.
+2026-03-18 12:58:01 | ERROR    | ingestion.loader | Tesseract OCR failed for D:\multi_model_rag\data\images\multimodal_ai_models.png: tesseract is not installed or it's not in your PATH. See README file for more information.
+2026-03-18 12:58:01 | INFO     | embeddings.gemini_embeddings | Embedding 1 texts in 1 batches (model=gemini-embedding-2-preview, batch_size=10)
+2026-03-18 12:58:01 | INFO     | embeddings.gemini_embeddings | Embedding batch 1/1 (1 texts)
+2026-03-18 12:58:03 | INFO     | embeddings.gemini_embeddings | Generated embeddings for 1 chunks (dim=3072)
+2026-03-18 12:58:03 | INFO     | vectorstore.chroma_client | Upserted 1 chunks into ChromaDB
+2026-03-18 12:58:03 | INFO     | rag.rag_pipeline | Ingested 1 chunks from D:\multi_model_rag\data\images\multimodal_ai_models.png
+2026-03-18 13:04:52 | INFO     | rag.rag_pipeline | RAG query: 'What is the projected Multimodal AI market size in 2030?...'
+2026-03-18 13:04:52 | INFO     | retrieval.retriever | Dense retrieval: query='What is the projected Multimodal AI market size in 2030?...', top_k=20
+2026-03-18 13:04:53 | INFO     | retrieval.hybrid_search | BM25 index built over 57 chunks
+2026-03-18 13:04:53 | INFO     | retrieval.reranker | Reranking 10 chunks with Cohere (top_n=5)
+2026-03-18 13:04:53 | INFO     | router.llm_router | LLM routing to: gemini
+2026-03-18 13:04:53 | ERROR    | api.routes | Query failed: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_input_token_count, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 0, model: gemini-2.0-flash\nPlease retry in 6.255557968s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_input_token_count', 'quotaId': 'GenerateContentInputTokensPerModelPerMinute-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.0-flash'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-2.0-flash'}}, {'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-2.0-flash', 'location': 'global'}}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '6s'}]}}
+2026-03-18 13:07:52 | INFO     | api.main | Shutting down application
+2026-03-18 13:07:55 | INFO     | api.main | Starting Multi-Model RAG API v1.0.0
+2026-03-18 13:07:55 | INFO     | api.main | Directories initialized
+2026-03-18 13:08:15 | INFO     | vectorstore.chroma_client | ChromaDB initialized: collection='rag_documents', persist_dir='./chroma_db', existing_docs=57
+2026-03-18 13:08:15 | INFO     | rag.rag_pipeline | RAG query: 'What is the projected Multimodal AI market size in 2030?...'
+2026-03-18 13:08:15 | INFO     | retrieval.retriever | Dense retrieval: query='What is the projected Multimodal AI market size in 2030?...', top_k=20
+2026-03-18 13:08:16 | INFO     | retrieval.hybrid_search | BM25 index built over 57 chunks
+2026-03-18 13:08:16 | INFO     | retrieval.reranker | Reranking 10 chunks with Cohere (top_n=5)
+2026-03-18 13:08:16 | INFO     | router.llm_router | LLM routing to: groq
+2026-03-18 14:26:16 | INFO     | api.main | Shutting down application
+2026-03-18 14:28:18 | INFO     | ingest_images_direct | Initializing RAG pipeline...
+2026-03-18 14:28:18 | INFO     | vectorstore.chroma_client | ChromaDB initialized: collection='rag_documents', persist_dir='./chroma_db', existing_docs=57
+2026-03-18 14:28:18 | INFO     | vectorstore.chroma_client | Deleted 2 chunks for source: D:\multi_model_rag\data\images\benchmark_results_chart.png
+2026-03-18 14:28:18 | INFO     | ingest_images_direct | Cleared existing chunks for: benchmark_results_chart.png
+2026-03-18 14:28:18 | INFO     | embeddings.gemini_embeddings | Embedding 5 texts in 1 batches (model=gemini-embedding-2-preview, batch_size=10)
+2026-03-18 14:28:18 | INFO     | embeddings.gemini_embeddings | Embedding batch 1/1 (5 texts)
+2026-03-18 14:28:21 | INFO     | embeddings.gemini_embeddings | Generated embeddings for 5 chunks (dim=3072)
+2026-03-18 14:28:21 | INFO     | vectorstore.chroma_client | Upserted 5 chunks into ChromaDB
+2026-03-18 14:28:21 | INFO     | ingest_images_direct | Ingested benchmark_results_chart.png -> 5 chunks
+2026-03-18 14:28:21 | INFO     | vectorstore.chroma_client | Deleted 2 chunks for source: D:\multi_model_rag\data\images\model_spec_card.png
+2026-03-18 14:28:21 | INFO     | ingest_images_direct | Cleared existing chunks for: model_spec_card.png
+2026-03-18 14:28:21 | INFO     | embeddings.gemini_embeddings | Embedding 4 texts in 1 batches (model=gemini-embedding-2-preview, batch_size=10)
+2026-03-18 14:28:21 | INFO     | embeddings.gemini_embeddings | Embedding batch 1/1 (4 texts)
+2026-03-18 14:28:23 | INFO     | embeddings.gemini_embeddings | Generated embeddings for 4 chunks (dim=3072)
+2026-03-18 14:28:23 | INFO     | vectorstore.chroma_client | Upserted 4 chunks into ChromaDB
+2026-03-18 14:28:23 | INFO     | ingest_images_direct | Ingested model_spec_card.png -> 4 chunks
+2026-03-18 14:28:23 | INFO     | vectorstore.chroma_client | Deleted 1 chunks for source: D:\multi_model_rag\data\images\multimodal_ai_models.png
+2026-03-18 14:28:23 | INFO     | ingest_images_direct | Cleared existing chunks for: multimodal_ai_models.png
+2026-03-18 14:28:23 | INFO     | embeddings.gemini_embeddings | Embedding 6 texts in 1 batches (model=gemini-embedding-2-preview, batch_size=10)
+2026-03-18 14:28:23 | INFO     | embeddings.gemini_embeddings | Embedding batch 1/1 (6 texts)
+2026-03-18 14:28:25 | INFO     | embeddings.gemini_embeddings | Generated embeddings for 6 chunks (dim=3072)
+2026-03-18 14:28:25 | INFO     | vectorstore.chroma_client | Upserted 6 chunks into ChromaDB
+2026-03-18 14:28:25 | INFO     | ingest_images_direct | Ingested multimodal_ai_models.png -> 6 chunks
+2026-03-18 14:28:25 | INFO     | vectorstore.chroma_client | Deleted 2 chunks for source: D:\multi_model_rag\data\images\rag_architecture_diagram.png
+2026-03-18 14:28:25 | INFO     | ingest_images_direct | Cleared existing chunks for: rag_architecture_diagram.png
+2026-03-18 14:28:25 | INFO     | embeddings.gemini_embeddings | Embedding 5 texts in 1 batches (model=gemini-embedding-2-preview, batch_size=10)
+2026-03-18 14:28:25 | INFO     | embeddings.gemini_embeddings | Embedding batch 1/1 (5 texts)
+2026-03-18 14:28:27 | INFO     | embeddings.gemini_embeddings | Generated embeddings for 5 chunks (dim=3072)
+2026-03-18 14:28:27 | INFO     | vectorstore.chroma_client | Upserted 5 chunks into ChromaDB
+2026-03-18 14:28:27 | INFO     | ingest_images_direct | Ingested rag_architecture_diagram.png -> 5 chunks
+2026-03-18 14:28:27 | INFO     | ingest_images_direct | Done! Ingested 20 image chunks. Total in DB: 70 | Sources: 10
+2026-03-18 14:30:11 | INFO     | api.main | Starting Multi-Model RAG API v1.0.0
+2026-03-18 14:30:11 | INFO     | api.main | Directories initialized
+2026-03-18 14:30:17 | INFO     | vectorstore.chroma_client | ChromaDB initialized: collection='rag_documents', persist_dir='./chroma_db', existing_docs=70
+2026-03-18 14:30:18 | INFO     | rag.rag_pipeline | RAG query: 'What is the projected Multimodal AI market size in 2030?...'
+2026-03-18 14:30:18 | INFO     | retrieval.retriever | Dense retrieval: query='What is the projected Multimodal AI market size in 2030?...', top_k=20
+2026-03-18 14:30:19 | INFO     | retrieval.hybrid_search | BM25 index built over 70 chunks
+2026-03-18 14:30:19 | INFO     | retrieval.reranker | Reranking 10 chunks with Cohere (top_n=5)
+2026-03-18 14:30:22 | INFO     | router.llm_router | LLM routing to: groq
+2026-03-18 14:31:18 | INFO     | rag.rag_pipeline | RAG query: 'Which RAG configuration has the highest RAGAS scores?...'
+2026-03-18 14:31:18 | INFO     | retrieval.retriever | Dense retrieval: query='Which RAG configuration has the highest RAGAS scores?...', top_k=20
+2026-03-18 14:31:19 | INFO     | retrieval.reranker | Reranking 10 chunks with Cohere (top_n=5)
+2026-03-18 14:31:19 | INFO     | router.llm_router | LLM routing to: groq
+2026-03-18 14:44:05 | INFO     | rag.rag_pipeline | RAG query: 'What happens after hybrid fusion in the RAG architecture?...'
+2026-03-18 14:44:05 | INFO     | retrieval.retriever | Dense retrieval: query='What happens after hybrid fusion in the RAG architecture?...', top_k=20
+2026-03-18 14:44:06 | INFO     | retrieval.reranker | Reranking 10 chunks with Cohere (top_n=5)
+2026-03-18 14:44:06 | INFO     | router.llm_router | LLM routing to: groq
+2026-03-18 14:46:54 | INFO     | rag.rag_pipeline | RAG query: 'How much does gemini-embedding-2-preview cost compared to OpenAI?...'
+2026-03-18 14:46:54 | INFO     | retrieval.retriever | Dense retrieval: query='How much does gemini-embedding-2-preview cost compared to Op...', top_k=20
+2026-03-18 14:46:54 | INFO     | retrieval.reranker | Reranking 10 chunks with Cohere (top_n=5)
+2026-03-18 14:46:55 | INFO     | router.llm_router | LLM routing to: groq
+2026-03-18 15:01:43 | INFO     | api.main | Shutting down application
+2026-03-28 15:05:28 | INFO     | api.main | Starting Multi-Model RAG API v1.0.0
+2026-03-28 15:05:28 | INFO     | api.main | Directories initialized
+2026-03-28 15:05:40 | INFO     | vectorstore.chroma_client | ChromaDB initialized: collection='rag_documents', persist_dir='./chroma_db', existing_docs=70
+2026-03-28 15:05:41 | INFO     | vectorstore.chroma_client | ChromaDB initialized: collection='rag_documents', persist_dir='./chroma_db', existing_docs=70
+2026-03-28 15:12:44 | INFO     | rag.rag_pipeline | RAG query: 'What is RAG and how does hybrid retrieval work?...'
+2026-03-28 15:12:44 | INFO     | retrieval.retriever | Dense retrieval: query='What is RAG and how does hybrid retrieval work?...', top_k=20
+2026-03-28 15:12:46 | INFO     | retrieval.hybrid_search | BM25 index built over 70 chunks
+2026-03-28 15:12:46 | INFO     | retrieval.reranker | Reranking 10 chunks with Cohere (top_n=5)
+2026-03-28 15:12:46 | INFO     | router.llm_router | LLM routing to: groq
+2026-03-28 15:13:12 | INFO     | rag.rag_pipeline | RAG query: 'make it small...'
+2026-03-28 15:13:12 | INFO     | retrieval.retriever | Dense retrieval: query='make it small...', top_k=20
+2026-03-28 15:13:13 | INFO     | retrieval.reranker | Reranking 10 chunks with Cohere (top_n=5)
+2026-03-28 15:13:13 | INFO     | router.llm_router | LLM routing to: groq
+2026-03-28 15:13:32 | INFO     | rag.rag_pipeline | RAG query: 'need smaller...'
+2026-03-28 15:13:32 | INFO     | retrieval.retriever | Dense retrieval: query='need smaller...', top_k=20
+2026-03-28 15:13:33 | INFO     | retrieval.reranker | Reranking 10 chunks with Cohere (top_n=5)
+2026-03-28 15:13:33 | INFO     | router.llm_router | LLM routing to: groq
+2026-03-28 15:15:49 | INFO     | rag.rag_pipeline | RAG query: 'give the rag_benchmark_result analysis...'
+2026-03-28 15:15:49 | INFO     | retrieval.retriever | Dense retrieval: query='give the rag_benchmark_result analysis...', top_k=20
+2026-03-28 15:15:49 | INFO     | retrieval.reranker | Reranking 10 chunks with Cohere (top_n=5)
+2026-03-28 15:15:51 | INFO     | router.llm_router | LLM routing to: groq
+2026-03-28 15:16:27 | INFO     | rag.rag_pipeline | RAG query: 'tell about rages scores...'
+2026-03-28 15:16:27 | INFO     | retrieval.retriever | Dense retrieval: query='tell about rages scores...', top_k=20
+2026-03-28 15:16:27 | INFO     | retrieval.reranker | Reranking 10 chunks with Cohere (top_n=5)
+2026-03-28 15:16:28 | INFO     | router.llm_router | LLM routing to: groq
+2026-03-28 15:41:11 | INFO     | api.main | Shutting down application
+2026-03-28 15:41:43 | INFO     | api.main | Starting Multi-Model RAG API v1.0.0
+2026-03-28 15:41:43 | INFO     | api.main | Directories initialized
+2026-03-28 15:50:18 | INFO     | api.main | Starting Multi-Model RAG API v1.0.0
+2026-03-28 15:50:18 | INFO     | api.main | Directories initialized
+2026-03-28 15:50:49 | INFO     | api.main | Shutting down application
+2026-03-28 15:51:01 | INFO     | api.main | Starting Multi-Model RAG API v1.0.0
+2026-03-28 15:51:01 | INFO     | api.main | Directories initialized
+2026-03-28 15:53:05 | INFO     | api.main | Shutting down application
+2026-04-09 14:15:29 | INFO     | api.main | Starting Multi-Model RAG API v1.0.0
+2026-04-09 14:15:29 | INFO     | api.main | Directories initialized
+2026-04-09 14:15:44 | INFO     | vectorstore.chroma_client | ChromaDB initialized: collection='rag_documents', persist_dir='./chroma_db', existing_docs=70
+2026-04-09 14:15:45 | INFO     | rag.rag_pipeline | RAG query: 'What is RAG and how does hybrid retrieval work?...'
+2026-04-09 14:15:45 | INFO     | retrieval.retriever | Dense retrieval: query='What is RAG and how does hybrid retrieval work?...', top_k=20
+2026-04-09 14:15:46 | INFO     | retrieval.hybrid_search | BM25 index built over 70 chunks
+2026-04-09 14:15:46 | INFO     | retrieval.reranker | Reranking 10 chunks with Cohere (top_n=5)
+2026-04-09 14:15:51 | INFO     | router.llm_router | LLM routing to: groq

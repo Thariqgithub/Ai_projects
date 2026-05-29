@@ -1,0 +1,99 @@
+Groq and the Llama 4 Scout Model
+=================================
+
+Overview
+--------
+Groq is an AI infrastructure company that builds Language Processing Units (LPUs), custom silicon
+designed specifically for inference workloads. Unlike GPUs, which are optimized for training through
+highly parallel matrix operations, the LPU is designed for sequential, memory-bandwidth-intensive
+inference tasks. The result is dramatically lower latency: Groq's hardware routinely achieves
+500-800 tokens per second on large language model inference, compared to 50-150 tokens per second
+on GPU-based cloud providers.
+
+Llama 4 Scout Architecture
+---------------------------
+Meta's Llama 4 Scout (llama-4-scout-17b-16e-instruct) is a Mixture-of-Experts (MoE) model with
+17 billion active parameters and 16 expert layers. MoE architecture activates only a subset of
+parameters for each token, allowing the model to have a much larger total parameter count (109B
+total across all experts) while keeping per-token compute requirements low.
+
+Key specifications:
+  - Active parameters per forward pass: 17B
+  - Total parameters: ~109B (across 16 experts)
+  - Context window: 128,000 tokens
+  - Architecture: Transformer with MoE routing
+  - Training data cutoff: Early 2025
+  - Instruction tuning: Yes (RLHF + DPO)
+
+Performance on Groq Hardware
+-----------------------------
+Running Llama 4 Scout on Groq's LPU cluster delivers the following measured throughput:
+
+  Prompt processing (prefill):     ~1200 tokens/second
+  Token generation (decode):       ~620  tokens/second
+  Time-to-first-token (TTFT):      < 200ms for 1K context
+  End-to-end latency (500 tokens): ~800ms
+
+These figures make Groq the fastest commercially available inference provider for Llama 4 Scout
+as of Q1 2025, making it particularly well-suited for real-time RAG pipelines where answer
+latency directly impacts user experience.
+
+Groq API Integration
+--------------------
+Groq exposes an OpenAI-compatible REST API at https://api.groq.com/openai/v1. This means any
+application built with the openai Python SDK can switch to Groq by changing two lines:
+
+    from groq import Groq
+    client = Groq(api_key="gsk_...")
+
+    response = client.chat.completions.create(
+        model="meta-llama/llama-4-scout-17b-16e-instruct",
+        messages=[{"role": "user", "content": "Explain RAG in one paragraph."}],
+        temperature=0.2,
+        max_tokens=1024,
+    )
+    print(response.choices[0].message.content)
+
+Rate Limits (Free Tier)
+-----------------------
+  Requests per minute:   30
+  Tokens per minute:     30,000
+  Tokens per day:        500,000
+
+Rate Limits (Developer Tier)
+-----------------------------
+  Requests per minute:   120
+  Tokens per minute:     200,000
+  Tokens per day:        Unlimited
+
+Use Cases
+---------
+Llama 4 Scout on Groq is especially well-suited for:
+
+1. Real-time RAG pipelines - low TTFT means users get fast streaming responses
+2. Multi-turn conversational agents - 128K context handles long conversation history
+3. Code generation and review - strong coding benchmark performance
+4. Document summarization - handles long documents in a single pass
+5. Structured output generation - follows JSON schema instructions reliably
+
+Limitations
+-----------
+- No native vision/multimodal capability (text-only)
+- Knowledge cutoff means very recent events require RAG augmentation
+- MoE routing can occasionally produce inconsistent outputs across similar prompts
+- Rate limits on free tier restrict high-throughput batch processing
+
+Comparison with Other Providers
+--------------------------------
+Provider          Model              Tokens/sec   TTFT      Context
+-------           -----              ----------   ----      -------
+Groq              Llama 4 Scout      620          <200ms    128K
+Together AI       Llama 4 Scout      180          ~600ms    128K
+Fireworks AI      Llama 4 Scout      210          ~500ms    128K
+Self-hosted GPU   Llama 4 Scout      80-150       ~1s       128K
+
+Conclusion
+----------
+For RAG applications requiring fast, cost-effective LLM inference, Groq's LPU paired with
+Llama 4 Scout offers the best latency profile available in 2025. The OpenAI-compatible API
+ensures minimal migration effort for teams already using OpenAI-based pipelines.
